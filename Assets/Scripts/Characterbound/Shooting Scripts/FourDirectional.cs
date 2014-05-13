@@ -10,7 +10,7 @@ public class FourDirectional : MonoBehaviour {
 
 	private float timeStamp;
 	private Animator anim;
-	private Animator secondanoim;
+
 	// Use this for initialization
 	void Start () {
 		MoveController = GetComponent<CharControlMod> ();
