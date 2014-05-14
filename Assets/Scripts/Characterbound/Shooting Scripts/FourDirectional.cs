@@ -8,6 +8,8 @@ public class FourDirectional : MonoBehaviour {
 	public GameObject projectile;
 	private GameObject ProjectileInstance;
 
+	private bool aired;
+
 	private float timeStamp;
 	private Animator anim;
 
@@ -21,16 +23,26 @@ public class FourDirectional : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		aired = MoveController.Aired ();
 
 		speedx = MoveController.HorSpeed ();
 
+
+		//shoot horizontal
 		if(Time.time > timeStamp && Input.GetButtonDown ("Fire1")){
 			timeStamp = Time.time + 0.5f;
 			anim.SetTrigger ("IdleShoot");
 			ShootHorizontalIdle ();
 		}
 
-		JumpShoot ();
+		//JumpShoot
+		if (aired && Input.GetButtonDown ("Fire1") && Input.GetButtonDown ("Vertical")) {
+			JumpShoot ();
+		}
+
+
+
+
 		ShootUp ();
 
 	}
@@ -48,7 +60,8 @@ public class FourDirectional : MonoBehaviour {
 	}
 
 	void JumpShoot(){
-
+		ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, -1f, 0f), Quaternion.Euler (0,0,0)) as GameObject;
+		ProjectileInstance.rigidbody2D.AddForce(new Vector2(0, -50000) * Time.deltaTime);
 	}
 
 	void ShootUp(){

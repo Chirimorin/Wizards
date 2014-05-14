@@ -18,7 +18,7 @@ public class CharControlMod : MonoBehaviour {
 	private bool isGrounded;
 	private bool isGrounded2;
 	private Raycast cast;
-	
+	private bool aired; //for sharing
 	// Camera
 	public Camera cam;
 
@@ -50,6 +50,12 @@ public class CharControlMod : MonoBehaviour {
 		isGrounded = cast.collides ();
 		isGrounded2 = cast.collides2 ();
 
+		//set aired for sharing
+		if (!isGrounded && !isGrounded2) {
+			aired = true;
+		} else {
+			aired = false;
+		}
 
 		//Set Animator variables
 		anim.SetFloat ("H_Speed", Mathf.Abs (speedx));
@@ -163,6 +169,10 @@ public class CharControlMod : MonoBehaviour {
 
 	public float HorSpeed(){
 		return speedx;
+	}
+
+	public bool Aired(){
+		return aired;
 	}
 
 }
