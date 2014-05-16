@@ -29,29 +29,36 @@ public class FourDirectional : MonoBehaviour {
 
 
 		//shoot horizontal
-		if(Time.time > timeStamp && Input.GetButtonDown ("Fire1")){
+		if(Time.time > timeStamp && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == 0){
 			timeStamp = Time.time + 0.5f;
-			anim.SetTrigger ("IdleShoot");
+
 			ShootHorizontalIdle ();
 		}
 
 		//JumpShoot
-		if (aired && Input.GetButtonDown ("Fire1") && Input.GetButtonDown ("Vertical")) {
+		if (Time.time > timeStamp && aired && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == -1) {
+			timeStamp = Time.time + 0.5f;
 			JumpShoot ();
 		}
 
 
 
+		if (Time.time > timeStamp && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == 1) {
+			timeStamp = Time.time + 0.5f;
+			ShootUp ();
+		}
+						
 
-		ShootUp ();
 
 	}
 
 	void ShootHorizontalIdle(){
 		if (transform.lossyScale.x < 0 && speedx == 0) {
+			anim.SetTrigger ("IdleShoot");
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (-1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
 			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-50000,0) * Time.deltaTime);
 		}else if (transform.lossyScale.x > 0 && speedx == 0) {
+			anim.SetTrigger ("IdleShoot");
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
 			ProjectileInstance.rigidbody2D.AddForce(new Vector2(50000,0) * Time.deltaTime);
 		}
@@ -65,7 +72,8 @@ public class FourDirectional : MonoBehaviour {
 	}
 
 	void ShootUp(){
-
+		ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, 1f, 0f), Quaternion.Euler (0,0,0)) as GameObject;
+		ProjectileInstance.rigidbody2D.AddForce(new Vector2(0, 50000) * Time.deltaTime);
 	}
 
 
