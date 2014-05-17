@@ -18,7 +18,7 @@ public class SkellyAI : MonoBehaviour {
 	private bool isGrounded;
 	private bool isGrounded2;
 
-	public GameObject parent; 
+	private GameObject parent; 
 
 	// Use this for initialization
 	void Start () {
