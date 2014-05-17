@@ -2269,7 +2269,7 @@ GameObject:
   - 23: {fileID: 1320216950}
   - 61: {fileID: 1320216951}
   - 114: {fileID: 1320216953}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2337,6 +2337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb35e1dc740d754babfdb2c2b358852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
 --- !u!1 &1358410585
 GameObject:
   m_ObjectHideFlags: 0
