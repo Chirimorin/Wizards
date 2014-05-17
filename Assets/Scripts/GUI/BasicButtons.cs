@@ -23,6 +23,7 @@ public class BasicButtons : MonoBehaviour {
 
 	void SpawnPlayer(float x, float y){
 		playerins = Network.Instantiate (playerPrefab, new Vector3 (x, y, 0), Quaternion.Euler (0,0,0), 0) as GameObject;
+
 	}
 
 
