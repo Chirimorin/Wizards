@@ -9,7 +9,6 @@ public class SummonSK : MonoBehaviour {
 	void Start () {
 		for (int i = 0; i < 1; i++) {
 			Instantiate (skeleton, new Vector3 (0, 0, 0), Quaternion.Euler (0, 0, 0));
-			
 		}
 	}
 	
