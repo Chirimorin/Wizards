@@ -89,7 +89,7 @@ public class CharControlMod : MonoBehaviour {
 		transform.position += vec;
 		vec = new Vector3 (speedx * Time.deltaTime, speedy, 0);
 		
-		if (axis == -1) {
+		if (axis < -0.5) {
 			speedx -= acceleration;
 			Vector3 rotate = transform.localScale;
 			rotate.x = -0.5f;
@@ -99,7 +99,7 @@ public class CharControlMod : MonoBehaviour {
 				speedx += 0;
 			}
 			
-		} else if (axis == 1) {
+		} else if (axis > 0.5) {
 			speedx += acceleration;
 			Vector3 rotate2 = transform.localScale;
 			rotate2.x = 0.5f;
@@ -109,7 +109,7 @@ public class CharControlMod : MonoBehaviour {
 				speedx += 0;
 			}
 			
-		} else if (axis == 0) {
+		} else {
 			if (speedx <= targetSpeed && speedx > 0) {
 				speedx -= brakeSpeed;
 				if (speedx <= 0) {
