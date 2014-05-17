@@ -18,7 +18,11 @@ public class SkellyAI : MonoBehaviour {
 	private bool isGrounded;
 	private bool isGrounded2;
 
+
 	private GameObject parent; 
+	private float timer;
+	private float goalPosition;
+
 
 	// Use this for initialization
 	void Start () {
@@ -26,22 +30,32 @@ public class SkellyAI : MonoBehaviour {
 		acceleration = 0.67f;
 		targetSpeed = 3.5f;
 		brakeSpeed = 1.00f;
+		timer = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float distance = parent.transform.position.x - transform.position.x;
+		float distance = transform.position.x - parent.transform.position.x - goalPosition;
 
-		if (distance < -1.5) {
-			xAxisMovement (-1);
-		}
-		else if (distance > 1.5) {
+		if (distance < -0.5) {
 			xAxisMovement (1);
 		}
+		else if (distance > 0.5) {
+			xAxisMovement (-1);
+		}
+		else {
+			xAxisMovement (0);
+		}
+		timer -= Time.deltaTime;
+		if (timer <= 0)
+		{
+			goalPosition = Random.Range ((float)-2.0,(float)2.0);
+			timer = Random.Range((float)2.0,(float)6.0);
+			Debug.Log ("goalPosition: " + goalPosition + " timer: " + timer);
+		}
 
 
-
-		Debug.Log (distance);
+		//Debug.Log ("distance: " + distance + " timer: " + timer);
 	}
 
 	void xAxisMovement(int axis){
