@@ -10,6 +10,7 @@ public class SkellyAI : MonoBehaviour {
 	public float brakeSpeed;
 	
 	public float targetSpeed;
+	public float targetIdleSpeed;
 	private float axis;
 	private Vector3 vec;
 
@@ -36,6 +37,7 @@ public class SkellyAI : MonoBehaviour {
 		parent = GameObject.Find ("NecroFT(Clone)");
 		acceleration = 0.67f;
 		targetSpeed = 5f;
+		targetIdleSpeed = 2f;
 		brakeSpeed = 1.00f;
 		maxDistance = 1.5f;
 		teleportDistance = 3.5f; 
@@ -57,11 +59,11 @@ public class SkellyAI : MonoBehaviour {
 			float distance = transform.position.x - parent.transform.position.x;
 
 			if (distance < -maxDistance) {
-				xAxisMovement (1);
+				xAxisMovement (1, targetSpeed);
 				idle = false;
 			}
 			else if (distance > maxDistance) {
-				xAxisMovement (-1);
+				xAxisMovement (-1, targetSpeed);
 				idle = false;
 			}
 			else {
@@ -81,13 +83,13 @@ public class SkellyAI : MonoBehaviour {
 				}
 
 				if (distance - goalDistance < -wanderPrecision && moving) {
-					xAxisMovement (1);
+					xAxisMovement (1, targetIdleSpeed);
 				}
 				else if (distance - goalDistance > wanderPrecision && moving) {
-					xAxisMovement (-1);
+					xAxisMovement (-1, targetIdleSpeed);
 				}
 				else {
-					xAxisMovement (0);
+					xAxisMovement (0, 0);
 					moving = false;
 				}
 			}
@@ -97,43 +99,41 @@ public class SkellyAI : MonoBehaviour {
 	void resetTimer(float newGoal, float distance){
 		goalDistance = newGoal;
 		timer = Random.Range(2f,6f);
-		Debug.Log ("Timer set: " + timer + " Goalposition: " + goalDistance + " Distance to goal: " + (distance - goalDistance));
+		Debug.Log ("Timer set: " + timer + " Goal distance: " + goalDistance + " Distance to goal: " + (distance - goalDistance));
 	}
 
-	void xAxisMovement(int axis){
+	void xAxisMovement(int axis, float currentTargetSpeed){
 		transform.position += vec;
 		vec = new Vector3 (speedx * Time.deltaTime, speedy, 0);
-		
-		if (axis == -1) {
+
+		if (axis == -1 && Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0f), -Vector2.up, 1f)) {
 			speedx -= acceleration;
 			Vector3 rotate = transform.localScale;
 			rotate.x = -0.5f;
 			transform.localScale = rotate;
-			if (speedx < targetSpeed * -1) {
-				speedx = -1 * targetSpeed;
-				speedx += 0;
+			if (speedx < -currentTargetSpeed) {
+				speedx = -currentTargetSpeed;
 			}
 			
-		} else if (axis == 1) {
+		} else if (axis == 1 && Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), -Vector2.up, 1f)) {
 			speedx += acceleration;
 			Vector3 rotate2 = transform.localScale;
 			rotate2.x = 0.5f;
 			transform.localScale = rotate2;
-			if(speedx > targetSpeed){
-				speedx = targetSpeed;
-				speedx += 0;
+			if(speedx > currentTargetSpeed){
+				speedx = currentTargetSpeed;
 			}
 			
-		} else if (axis == 0) {
-			if (speedx <= targetSpeed && speedx > 0) {
+		} else {
+			if (speedx > 0) {
 				speedx -= brakeSpeed;
-				if (speedx <= 0) {
+				if (speedx < 0) {
 					speedx = 0;
 				}
 			}
-			if (speedx >= -targetSpeed && speedx < 0) {
+			if (speedx < 0) {
 				speedx += brakeSpeed;
-				if (speedx >= 0) {
+				if (speedx > 0) {
 					speedx = 0;
 				}
 			}
