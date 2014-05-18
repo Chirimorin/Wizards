@@ -17,7 +17,7 @@ public class Platforming : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter2D(Collision2D col){
+	/*void OnCollisionEnter2D(Collision2D col){
 		if (col.collider.name == "NecroFT(Clone)" && col.collider.transform.position.y < transform.position.y) {
 			Debug.Log ("yo");
 			Transform platform = transform.parent;
@@ -27,13 +27,22 @@ public class Platforming : MonoBehaviour {
 
 		}
 
+	}*/
+
+	void OnTriggerEnter2D(Collider2D col){
+		if (col.name == "NecroFT(Clone)") {
+			Debug.Log ("whattup");
+			Physics2D.IgnoreLayerCollision (8, 9);
+		}
+
+
 	}
 
-	void OnCollisionExit2D(Collision2D col){
+	void OnTriggerExit2D(Collider2D col){
 
 
-		if (col.collider.name == "NecroFT(Clone)") {
-
+		if (col.name == "NecroFT(Clone)") {
+			Debug.Log ("hallo");
 		}
 
 

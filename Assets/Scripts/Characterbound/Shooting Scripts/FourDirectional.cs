@@ -13,6 +13,9 @@ public class FourDirectional : MonoBehaviour {
 	private float timeStamp;
 	private Animator anim;
 
+	private float verticalVelo;
+
+
 	// Use this for initialization
 	void Start () {
 		MoveController = GetComponent<CharControlMod> ();
@@ -22,6 +25,9 @@ public class FourDirectional : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		verticalVelo = rigidbody2D.velocity.y;
+		//Debug.Log (verticalVelo);
 
 		aired = MoveController.Aired ();
 
@@ -62,7 +68,7 @@ public class FourDirectional : MonoBehaviour {
 		if (transform.lossyScale.x < 0) {
 			anim.SetTrigger ("IdleShoot");
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (-1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
-			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-50000,0) * Time.deltaTime);
+			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-50000, 0) * Time.deltaTime);
 		}else if (transform.lossyScale.x > 0) {
 			anim.SetTrigger ("IdleShoot");
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
@@ -75,11 +81,11 @@ public class FourDirectional : MonoBehaviour {
 	void ShootHorizontalMoving(){
 		if (transform.lossyScale.x < 0 ) {
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (-1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
-			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-50000,0) * Time.deltaTime);
+			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-50000f, 0) * Time.deltaTime);
 		}
 		if (transform.lossyScale.x > 0 ) {
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
-			ProjectileInstance.rigidbody2D.AddForce(new Vector2(50000,0) * Time.deltaTime);
+			ProjectileInstance.rigidbody2D.AddForce(new Vector2(50000, 0) * Time.deltaTime);
 		}
 
 
