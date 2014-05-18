@@ -22,6 +22,9 @@ public class CharControlMod : MonoBehaviour {
 	//Animation
 	private Animator anim;
 
+	//Platforming
+	private float verticalVelocity;
+
 
 	//Networking vars
 	private Vector3 syncStartPosition, syncNewPosition;
@@ -42,6 +45,8 @@ public class CharControlMod : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//Vertical velocity in case needed
+		verticalVelocity = rigidbody2D.velocity.y;
 		//Set Animator variables
 		anim.SetFloat ("H_Speed", Mathf.Abs (speedx));
 
@@ -112,7 +117,7 @@ public class CharControlMod : MonoBehaviour {
 	
 	
 	void Jump(){
-		if (Input.GetButtonDown ("Jump") && !Aired()) {
+		if (Input.GetButtonDown ("Jump") && !Aired() && verticalVelocity < 0.1f){
 			rigidbody2D.AddForce(new Vector3 (0, jumpheight, 0));
 		}
 	}
@@ -155,4 +160,7 @@ public class CharControlMod : MonoBehaviour {
 		return (!(cast.collides ()) && !(cast.collides2 ()));
 	}
 
+	public float GetVerticalSpeed(){
+		return verticalVelocity; 
+	}
 }
