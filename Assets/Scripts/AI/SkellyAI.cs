@@ -35,7 +35,7 @@ public class SkellyAI : MonoBehaviour {
 	void Start () {
 		parent = GameObject.Find ("NecroFT(Clone)");
 		acceleration = 0.67f;
-		targetSpeed = 3.5f;
+		targetSpeed = 5f;
 		brakeSpeed = 1.00f;
 		maxDistance = 1.5f;
 		teleportDistance = 3.5f; 
