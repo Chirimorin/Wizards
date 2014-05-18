@@ -20,9 +20,6 @@ public class SkellyAI : MonoBehaviour {
 	
 	//Jumping
 	public int jumpheight;
-	private bool isGrounded;
-	private bool isGrounded2;
-
 
 	private GameObject parent; 
 	private float parentPosition;
@@ -30,6 +27,9 @@ public class SkellyAI : MonoBehaviour {
 	private float goalDistance;
 	private bool idle;
 	private bool moving;
+
+	private BoxCollider2D coll;
+
 
 
 	// Use this for initialization
@@ -48,6 +48,8 @@ public class SkellyAI : MonoBehaviour {
 		moving = false;
 		goalDistance = 0;
 		parentPosition = parent.transform.position.x;
+
+		coll = GetComponent<BoxCollider2D>();
 	}
 	
 	// Update is called once per frame
@@ -106,7 +108,22 @@ public class SkellyAI : MonoBehaviour {
 		transform.position += vec;
 		vec = new Vector3 (speedx * Time.deltaTime, speedy, 0);
 
-		if (axis == -1 && Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0f), -Vector2.up, 1f)) {
+		bool move;
+		if ( Physics2D.Raycast(transform.position + new Vector3((float)(0.5*axis), 0f), -Vector2.up, 1f) ||
+		     transform.position.y > parent.transform.position.y ) 
+		{
+			move = true;
+		} else {
+			if ( Physics2D.Raycast(new Vector3(parent.transform.position.x + goalDistance, transform.position.y), -Vector2.up, 1f) ){
+				Jump ();
+				move = true;
+			}
+			else {
+				move = false;
+			}
+		}
+
+		if (axis == -1 && move) {
 			speedx -= acceleration;
 			Vector3 rotate = transform.localScale;
 			rotate.x = -0.5f;
@@ -115,7 +132,7 @@ public class SkellyAI : MonoBehaviour {
 				speedx = -currentTargetSpeed;
 			}
 			
-		} else if (axis == 1 && Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), -Vector2.up, 1f)) {
+		} else if (axis == 1 && move) {
 			speedx += acceleration;
 			Vector3 rotate2 = transform.localScale;
 			rotate2.x = 0.5f;
@@ -138,6 +155,17 @@ public class SkellyAI : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	void Jump(){
+		Debug.Log ("Jump = " + IsGrounded());
+		if (IsGrounded ()) {
+			rigidbody2D.AddForce(new Vector3 (0, 100));
+		}
+	}
+
+	bool IsGrounded() {
+		return Physics2D.Raycast (transform.position + new Vector3(0,( coll.size * 0.5f).y), -Vector3.up, 0.3f);
 	}
 	
 }

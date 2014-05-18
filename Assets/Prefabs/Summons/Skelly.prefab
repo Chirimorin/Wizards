@@ -101,6 +101,7 @@ MonoBehaviour:
   acceleration: 0
   brakeSpeed: 0
   targetSpeed: 0
+  targetIdleSpeed: 0
   maxDistance: 0
   teleportDistance: 0
   wanderPrecision: 0
