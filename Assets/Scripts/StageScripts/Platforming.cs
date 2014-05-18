@@ -3,49 +3,43 @@ using System.Collections;
 
 public class Platforming : MonoBehaviour {
 
-	public GameObject parent;
+
+
+	private bool triggered;
+	private float verticalSpeed;
+	private GameObject parent;
 
 	// Use this for initialization
 	void Start () {
-		parent = GameObject.Find ("NecroFT(Clone)");
+
+		triggered = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//float distance = parent.transform.position.y - transform.position.y;
-		//Debug.Log (Vector3.Distance(parent.transform.position, transform.position));
+		//Update the parent
+		parent = GameObject.Find("NecroFT(Clone)");
 
-	}
+		verticalSpeed = parent.rigidbody2D.velocity.y;
 
-	/*void OnCollisionEnter2D(Collision2D col){
-		if (col.collider.name == "NecroFT(Clone)" && col.collider.transform.position.y < transform.position.y) {
-			Debug.Log ("yo");
-			Transform platform = transform.parent;
-			Physics2D.IgnoreLayerCollision (8, 9);
+		if (verticalSpeed < 1) {
+			triggered = false;
+		}
+		Debug.Log (verticalSpeed);
+		if (!triggered) {
+			Physics2D.IgnoreLayerCollision (8, 9, false);
 		} else {
-			Physics2D.IgnoreLayerCollision (8, 9, true);
-
+			Physics2D.IgnoreLayerCollision (8,9);
 		}
 
-	}*/
+		//Debug.Log (triggered);
+	}
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.name == "NecroFT(Clone)") {
-			Debug.Log ("whattup");
-			Physics2D.IgnoreLayerCollision (8, 9);
+			Debug.Log ("enter");
+			triggered = true;
 		}
-
-
-	}
-
-	void OnTriggerExit2D(Collider2D col){
-
-
-		if (col.name == "NecroFT(Clone)") {
-			Debug.Log ("hallo");
-		}
-
-
 
 
 	}
