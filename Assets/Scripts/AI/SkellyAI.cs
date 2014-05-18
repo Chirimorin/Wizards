@@ -50,7 +50,7 @@ public class SkellyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance (transform.position, parent.transform.position) > teleportDistance) {
+		if (Vector3.Distance (transform.position, parent.transform.position) > teleportDistance && !(((CharControlMod)(parent.GetComponent("CharControlMod"))).Aired())) {
 			transform.position = new Vector3(parent.transform.position.x + Random.Range (-0.5f, 0.5f), parent.transform.position.y, 0);
 		}
 		else {
