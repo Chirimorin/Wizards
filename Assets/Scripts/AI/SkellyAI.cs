@@ -14,6 +14,7 @@ public class SkellyAI : MonoBehaviour {
 	private Vector3 vec;
 
 	public float maxDistance;
+	public float teleportDistance;
 	public float wanderPrecision;
 	
 	//Jumping
@@ -37,6 +38,7 @@ public class SkellyAI : MonoBehaviour {
 		targetSpeed = 3.5f;
 		brakeSpeed = 1.00f;
 		maxDistance = 1.5f;
+		teleportDistance = 3.5f; 
 		wanderPrecision = 0.25f;
 
 		timer = 0;
@@ -48,41 +50,46 @@ public class SkellyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float distance = transform.position.x - parent.transform.position.x;
-
-		if (distance < -maxDistance) {
-			xAxisMovement (1);
-			idle = false;
-		}
-		else if (distance > maxDistance) {
-			xAxisMovement (-1);
-			idle = false;
+		if (Vector3.Distance (transform.position, parent.transform.position) > teleportDistance) {
+			transform.position = new Vector3(parent.transform.position.x + Random.Range (-0.5f, 0.5f), parent.transform.position.y, 0);
 		}
 		else {
-			// Idle mode
-			if (idle) {
-				timer -= Time.deltaTime;
-				if (timer <= 0)
-				{
-					resetTimer(Random.Range (-maxDistance,maxDistance), distance);
-					moving = true;
-				}
-			}
-			else {
-				idle = true;
-				moving = true;
-				resetTimer(distance, distance);
-			}
+			float distance = transform.position.x - parent.transform.position.x;
 
-			if (distance - goalDistance < -wanderPrecision && moving) {
+			if (distance < -maxDistance) {
 				xAxisMovement (1);
+				idle = false;
 			}
-			else if (distance - goalDistance > wanderPrecision && moving) {
+			else if (distance > maxDistance) {
 				xAxisMovement (-1);
+				idle = false;
 			}
 			else {
-				xAxisMovement (0);
-				moving = false;
+				// Idle mode
+				if (idle) {
+					timer -= Time.deltaTime;
+					if (timer <= 0)
+					{
+						resetTimer(Random.Range (-maxDistance,maxDistance), distance);
+						moving = true;
+					}
+				}
+				else {
+					idle = true;
+					moving = true;
+					resetTimer(distance, distance);
+				}
+
+				if (distance - goalDistance < -wanderPrecision && moving) {
+					xAxisMovement (1);
+				}
+				else if (distance - goalDistance > wanderPrecision && moving) {
+					xAxisMovement (-1);
+				}
+				else {
+					xAxisMovement (0);
+					moving = false;
+				}
 			}
 		}
 	}
