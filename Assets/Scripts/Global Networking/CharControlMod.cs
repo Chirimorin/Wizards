@@ -15,10 +15,7 @@ public class CharControlMod : MonoBehaviour {
 	
 	//Jumping
 	public int jumpheight;
-	private bool isGrounded;
-	private bool isGrounded2;
 	private Raycast cast;
-	private bool aired; //for sharing
 	// Camera
 	public Camera cam;
 
@@ -34,7 +31,6 @@ public class CharControlMod : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
 		anim = gameObject.GetComponent<Animator> ();
 
 		cast = gameObject.GetComponent<Raycast> ();
@@ -45,17 +41,6 @@ public class CharControlMod : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		//vars that should update
-		isGrounded = cast.collides ();
-		isGrounded2 = cast.collides2 ();
-
-		//set aired for sharing
-		if (!isGrounded && !isGrounded2) {
-			aired = true;
-		} else {
-			aired = false;
-		}
 
 		//Set Animator variables
 		anim.SetFloat ("H_Speed", Mathf.Abs (speedx));
@@ -127,12 +112,7 @@ public class CharControlMod : MonoBehaviour {
 	
 	
 	void Jump(){
-		if (Input.GetButtonDown ("Jump") && isGrounded) {
-			
-			rigidbody2D.AddForce(new Vector3 (0, jumpheight, 0));
-			
-		}else if(Input.GetButtonDown("Jump") && isGrounded2){
-			
+		if (Input.GetButtonDown ("Jump") && !Aired()) {
 			rigidbody2D.AddForce(new Vector3 (0, jumpheight, 0));
 		}
 	}
@@ -172,7 +152,7 @@ public class CharControlMod : MonoBehaviour {
 	}
 
 	public bool Aired(){
-		return aired;
+		return (!(cast.collides ()) && !(cast.collides2 ()));
 	}
 
 }
