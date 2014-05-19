@@ -117,8 +117,10 @@ public class CharControlMod : MonoBehaviour {
 	
 	
 	void Jump(){
-		if (Input.GetButtonDown ("Jump") && !Aired() && verticalVelocity < 0.1f){
-			rigidbody2D.AddForce(new Vector3 (0, jumpheight, 0));
+		if (Input.GetButtonDown ("Jump") && !Aired () && verticalVelocity < 0.1f && Input.GetAxisRaw ("Vertical") != -1) {
+			rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
+		} else if (Input.GetButtonDown ("Jump") && Input.GetAxisRaw ("Vertical") == -1) {
+			return;
 		}
 	}
 
