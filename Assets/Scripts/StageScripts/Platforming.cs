@@ -25,7 +25,7 @@ public class Platforming : MonoBehaviour {
 		if (verticalSpeed < 1) {
 			triggered = false;
 		}
-		Debug.Log (verticalSpeed);
+		//Debug.Log (verticalSpeed);
 		if (!triggered) {
 			Physics2D.IgnoreLayerCollision (8, 9, false);
 		} else {
@@ -37,7 +37,7 @@ public class Platforming : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.name == "NecroFT(Clone)") {
-			Debug.Log ("enter");
+			//Debug.Log ("enter");
 			triggered = true;
 		}
 

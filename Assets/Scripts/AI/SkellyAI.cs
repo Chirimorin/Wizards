@@ -29,8 +29,10 @@ public class SkellyAI : MonoBehaviour {
 	private bool moving;
 
 	private BoxCollider2D coll;
+	private Vector3 bottomLeft;
+	private Vector3 bottomRight;
 
-
+	private LayerMask maskLayer;
 
 	// Use this for initialization
 	void Start () {
@@ -50,21 +52,33 @@ public class SkellyAI : MonoBehaviour {
 		parentPosition = parent.transform.position.x;
 
 		coll = GetComponent<BoxCollider2D>();
+		Vector3 extents = GetComponent<BoxCollider2D>().size * 0.3f;
+		bottomLeft = new Vector3(-extents.x, -extents.y, 0f);
+		bottomRight = new Vector3(extents.x, -extents.y, 0f);
+
+
+		maskLayer = (LayerMask)0;
+		maskLayer |= (1 << LayerMask.NameToLayer("Default"));
+		maskLayer |= (1 << LayerMask.NameToLayer("Platforms"));
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Vector3.Distance (transform.position, parent.transform.position) > teleportDistance && !(((CharControlMod)(parent.GetComponent("CharControlMod"))).Aired())) {
+			Debug.Log("Teleporting to player...");
 			transform.position = new Vector3(parent.transform.position.x + Random.Range (-0.5f, 0.5f), parent.transform.position.y, 0);
 		}
 		else {
 			float distance = transform.position.x - parent.transform.position.x;
 
 			if (distance < -maxDistance) {
+				goalDistance = -maxDistance;
 				xAxisMovement (1, targetSpeed);
 				idle = false;
 			}
 			else if (distance > maxDistance) {
+				goalDistance = maxDistance;
 				xAxisMovement (-1, targetSpeed);
 				idle = false;
 			}
@@ -109,12 +123,14 @@ public class SkellyAI : MonoBehaviour {
 		vec = new Vector3 (speedx * Time.deltaTime, speedy, 0);
 
 		bool move;
-		if ( Physics2D.Raycast(transform.position + new Vector3((float)(0.5*axis), 0f), -Vector2.up, 1f) ||
+
+		if ( solidInFront(axis) || //Physics2D.Raycast(transform.position + new Vector3((float)(0.5*axis), 0f), -Vector2.up, 1f) ||
+		     !IsGrounded() ||
 		     transform.position.y > parent.transform.position.y ) 
 		{
 			move = true;
 		} else {
-			if ( Physics2D.Raycast(new Vector3(parent.transform.position.x + goalDistance, transform.position.y), -Vector2.up, 1f) ){
+			if ( goalIsSolid() ){
 				Jump ();
 				move = true;
 			}
@@ -160,12 +176,36 @@ public class SkellyAI : MonoBehaviour {
 	void Jump(){
 		Debug.Log ("Jump = " + IsGrounded());
 		if (IsGrounded ()) {
-			rigidbody2D.AddForce(new Vector3 (0, 100));
+			rigidbody2D.velocity += new Vector2(0,1); //.AddForce(new Vector3 (0, 100), ForceMode.Impulse);
 		}
 	}
 
 	bool IsGrounded() {
-		return Physics2D.Raycast (transform.position + new Vector3(0,( coll.size * 0.5f).y), -Vector3.up, 0.3f);
+		Vector2 pos1 = transform.position + bottomLeft; //new Vector2 (
+			//(transform.position.x - (((coll.size * 0.5f).x))),
+			//(transform.position.y - ((coll.size * 0.5f).y)));
+		Vector2 pos2 = transform.position + bottomRight; //new Vector2 (
+			//(transform.position.x + (((coll.size * 0.5f).x))),
+			//(transform.position.y - ((coll.size * 0.5f).y)));
+
+		Debug.DrawRay (pos1, -Vector2.up * 0.1f, Color.yellow);
+		Debug.DrawRay (pos2, -Vector2.up * 0.1f, Color.yellow);
+		return Physics2D.Raycast(pos1, -Vector2.up, 0.1f);
+	}
+
+	bool solidInFront(int axis) {
+		Vector2 pos = new Vector2 (
+			(transform.position.x + (((coll.size * 0.5f).x) * axis)),
+			(transform.position.y - ((coll.size * 0.5f).y)));
+		Debug.DrawRay (pos, -Vector2.up * 0.1f, Color.red);
+
+		return Physics2D.Raycast(pos, -Vector2.up, 0.1f, maskLayer);
+	}
+
+	bool goalIsSolid(){
+		Vector2 pos = new Vector2 (parent.transform.position.x + goalDistance, transform.position.y);
+		Debug.DrawRay (pos, -Vector2.up * 1, Color.green);
+		return Physics2D.Raycast(pos, -Vector2.up, 1f, maskLayer);
 	}
 	
 }
