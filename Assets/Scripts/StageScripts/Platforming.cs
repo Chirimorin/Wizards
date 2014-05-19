@@ -9,10 +9,14 @@ public class Platforming : MonoBehaviour {
 	private float verticalSpeed;
 	private GameObject parent;
 
+	private float verticalDifference;
+
+
 	// Use this for initialization
 	void Start () {
 
 		triggered = false;
+
 	}
 	
 	// Update is called once per frame
@@ -21,16 +25,26 @@ public class Platforming : MonoBehaviour {
 		parent = GameObject.Find("NecroFT(Clone)");
 
 		verticalSpeed = parent.rigidbody2D.velocity.y;
+		verticalDifference = -1 * (transform.position.y - parent.transform.position.y);
 
-		if (verticalSpeed < 1) {
+
+		if(verticalDifference > 0.70f && Input.GetButtonDown ("Jump") && Input.GetAxisRaw ("Vertical") == -1){ //drop logix
+			Debug.Log ("Drop");
+			triggered = false;
+		}else if (verticalSpeed < 1 && verticalDifference > 0.70f) {
 			triggered = false;
 		}
-		Debug.Log (verticalSpeed);
+
+		//Debug.Log (verticalSpeed);
 		if (!triggered) {
 			Physics2D.IgnoreLayerCollision (8, 9, false);
 		} else {
 			Physics2D.IgnoreLayerCollision (8,9);
 		}
+
+
+
+
 
 		//Debug.Log (triggered);
 	}
@@ -40,8 +54,17 @@ public class Platforming : MonoBehaviour {
 			Debug.Log ("enter");
 			triggered = true;
 		}
+	}
+
+	void OnTriggerStay2D(Collider2D col){
+		if (col.name == "NecroFT(Clone)") {
+			triggered = true;
+
+		}
 
 
 	}
+
+
 
 }
