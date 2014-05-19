@@ -22,10 +22,18 @@ public class Platforming : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Update the parent
-		parent = GameObject.Find("NecroFT(Clone)");
 
+			parent = GameObject.Find("NecroFT(Clone)");
+
+
+		try{
 		verticalSpeed = parent.rigidbody2D.velocity.y;
 		verticalDifference = -1 * (transform.position.y - parent.transform.position.y);
+		}catch(System.Exception e){
+
+		}
+
+
 
 
 		if(verticalDifference > 0.70f && Input.GetButtonDown ("Jump") && Input.GetAxisRaw ("Vertical") == -1){ //drop logix
