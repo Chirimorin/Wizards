@@ -142,8 +142,8 @@ public class SkellyAI : MonoBehaviour {
 		if (axis == -1 && move) {
 			speedx -= acceleration;
 			Vector3 rotate = transform.localScale;
-			rotate.x = -0.5f;
-			transform.localScale = rotate;
+			//rotate.x = -0.5f;
+			//transform.localScale = rotate;
 			if (speedx < -currentTargetSpeed) {
 				speedx = -currentTargetSpeed;
 			}
@@ -151,8 +151,8 @@ public class SkellyAI : MonoBehaviour {
 		} else if (axis == 1 && move) {
 			speedx += acceleration;
 			Vector3 rotate2 = transform.localScale;
-			rotate2.x = 0.5f;
-			transform.localScale = rotate2;
+			//rotate2.x = 0.5f;
+			//transform.localScale = rotate2;
 			if(speedx > currentTargetSpeed){
 				speedx = currentTargetSpeed;
 			}
