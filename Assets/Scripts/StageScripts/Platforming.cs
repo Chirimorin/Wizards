@@ -51,7 +51,7 @@ public class Platforming : MonoBehaviour {
 		}
 
 
-
+		//shut trigger off niet vergeten on exit/enter
 
 
 		//Debug.Log (triggered);
@@ -73,6 +73,12 @@ public class Platforming : MonoBehaviour {
 
 	}
 
+	void OnTriggerExit2D(Collider2D col){
+		if (col.name == "NecroFT(Clone)") {
+			Debug.Log ("exit");
+			triggered = false;
+		}
+	}
 
 
 }
