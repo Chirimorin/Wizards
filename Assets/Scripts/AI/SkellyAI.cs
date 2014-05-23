@@ -30,6 +30,10 @@ public class SkellyAI : MonoBehaviour {
 
 	private DetectionScript DS;
 
+	//Animation
+	private Animator anim;
+
+
 	// Use this for initialization
 	void Start () {
 		parent = GameObject.Find ("NecroFT(Clone)");
@@ -48,10 +52,16 @@ public class SkellyAI : MonoBehaviour {
 		parentPosition = parent.transform.position.x;
 
 		DS = this.GetComponent<DetectionScript>();
+
+		anim = gameObject.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		//update animation parameter;
+		anim.SetFloat ("HorizontalSpeed", Mathf.Abs (speedx));
+
 		if (Vector3.Distance (transform.position, parent.transform.position) > teleportDistance && !(((CharControlMod)(parent.GetComponent("CharControlMod"))).Aired())) {
 			Debug.Log("Teleporting to player...");
 			transform.position = new Vector3(parent.transform.position.x + Random.Range (-0.5f, 0.5f), parent.transform.position.y, 0);
