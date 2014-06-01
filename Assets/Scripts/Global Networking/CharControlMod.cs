@@ -25,6 +25,9 @@ public class CharControlMod : MonoBehaviour {
 	//Platforming
 	private float verticalVelocity;
 
+	//Collisions
+	private Vector3 getHorPos;
+
 
 	//Networking vars
 	private Vector3 syncStartPosition, syncNewPosition;
@@ -61,14 +64,14 @@ public class CharControlMod : MonoBehaviour {
 			networkView.RPC ("Jump", RPCMode.Others);
 		}*/
 		
-		if (networkView.isMine) {
+		//if (networkView.isMine) {
 			xAxisMovement ();
 			Jump ();
-			cam.enabled = true;
-		} else {
-			cam.enabled = false;
-			SyncedMovement ();
-		}
+			//cam.enabled = true;
+		//} else {
+			//cam.enabled = false;
+			//SyncedMovement ();
+		//}
 	}
 	
 	
@@ -78,7 +81,8 @@ public class CharControlMod : MonoBehaviour {
 		axis = Input.GetAxisRaw ("Horizontal");
 		transform.position += vec;
 		vec = new Vector3 (speedx * Time.deltaTime, speedy, 0);
-		
+		getHorPos = transform.position;
+
 		if (axis < -0.5) {
 			speedx -= acceleration;
 			Vector3 rotate = transform.localScale;
@@ -124,7 +128,7 @@ public class CharControlMod : MonoBehaviour {
 		}
 	}
 
-	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info){
+	/*void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info){
 
 		Vector3 storePosition = new Vector3();
 		Vector3 positionVelocity = new Vector3 ();
@@ -152,6 +156,19 @@ public class CharControlMod : MonoBehaviour {
 	void SyncedMovement(){
 		syncTime += Time.deltaTime;
 		rigidbody2D.transform.position = Vector3.Lerp (syncStartPosition, syncNewPosition, syncTime/syncDelay);
+	}*/
+
+	void OnCollisionEnter2D(Collision2D col){
+		if(col.collider.tag == "Wall"){
+			speedx = 0;
+		}
+	
+	}
+
+	void OnCollisionStay2D(Collision2D col){
+		if(col.collider.tag == "Wall"){
+			speedx = 0;
+		}
 	}
 
 	public float HorSpeed(){

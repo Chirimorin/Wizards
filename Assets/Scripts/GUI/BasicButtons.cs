@@ -13,16 +13,16 @@ public class BasicButtons : MonoBehaviour {
 	private bool connectServerShow = false;
 	// Use this for initialization
 	void Start () {
-
+		SpawnPlayer (-3,-2);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	void SpawnPlayer(float x, float y){
-		playerins = Network.Instantiate (playerPrefab, new Vector3 (x, y, 0), Quaternion.Euler (0,0,0), 0) as GameObject;
+		playerins = Instantiate (playerPrefab, new Vector3 (x, y, 0), Quaternion.Euler (0,0,0)) as GameObject;
 
 	}
 
@@ -89,7 +89,7 @@ public class BasicButtons : MonoBehaviour {
 			}
 		}
 	}
-	
+	/*
 	void OnServerInitialized(){
 		SpawnPlayer (-3, -2);
 
@@ -100,5 +100,5 @@ public class BasicButtons : MonoBehaviour {
 	void OnConnectedToServer(){
 		SpawnPlayer (-4, -2);
 	}
-	
+	*/
 }
