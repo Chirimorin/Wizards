@@ -33,6 +33,7 @@ public class Healthbars : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		ChangeHealthBar (0);
+		//emptyHealth.Resize (50, (int)(39 * 0.375));
 	}
 
 	void OnGUI(){
