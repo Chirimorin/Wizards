@@ -29,6 +29,7 @@ public class BasicButtons : MonoBehaviour {
 
 	void OnGUI()
 	{
+		/*
 		if(Network.peerType == NetworkPeerType.Disconnected)
 		{
 
@@ -87,7 +88,7 @@ public class BasicButtons : MonoBehaviour {
 
 
 			}
-		}
+		}*/
 	}
 	/*
 	void OnServerInitialized(){
