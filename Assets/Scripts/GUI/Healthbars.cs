@@ -3,11 +3,18 @@ using System.Collections;
 
 public class Healthbars : MonoBehaviour {
 
-	public int curHealth = 100;
-	private int maxHealth = 100;
+	public float curHealth = 100;
+	private float maxHealth = 100;
 
-	private float healthbarlength;
-	private float manaBarLenght;
+	private float maxMana = 80;
+	private float curMana = 80;
+
+	public float healthbarlength;
+	public float negativeHealthLength;
+	private float manaBarLength;
+	public int width = 1024;
+
+	public float timer;
 
 	private Texture2D HUD;
 	private Texture2D FlareEffects;
@@ -15,8 +22,18 @@ public class Healthbars : MonoBehaviour {
 	private Texture2D emptyHealth;
 	private Texture2D emptyMana;
 	private Texture2D emptyXP;
+	private Texture2D health;
+	private Texture2D negativeHealth;
+	private Texture2D mana;
 	// Use this for initialization
 	void Start () {
+
+		timer = 0;
+
+		healthbarlength = 1285f;
+		negativeHealthLength = 1285f;
+
+		manaBarLength = 1268f;
 
 		HUD = Resources.Load("GUI/HUD/HUD") as Texture2D;
 		FlareEffects = Resources.Load ("GUI/HUD/HUD flare effects") as Texture2D;
@@ -26,14 +43,28 @@ public class Healthbars : MonoBehaviour {
 		emptyHealth = Resources.Load ("GUI/HUD/empty hp bar") as Texture2D;
 		emptyMana = Resources.Load ("GUI/HUD/empty mana bar") as Texture2D;
 
-		healthbarlength = Screen.width / 2;
-		manaBarLenght = Screen.width / 4;
+		health = Resources.Load ("GUI/HUD/hp bar") as Texture2D;
+		negativeHealth = Resources.Load ("GUI/HUD/negative hp bar") as Texture2D;
+
+		mana = Resources.Load ("GUI/HUD/mana bar") as Texture2D;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		ChangeHealthBar (0);
-		//emptyHealth.Resize (50, (int)(39 * 0.375));
+
+		timer += Time.deltaTime;
+
+		ChangeBars ();
+
+		if (timer > 1f && negativeHealthLength >= healthbarlength) {
+			negativeHealthLength -= 10f;
+		}
+
+		if (Input.GetButtonDown ("Fire1")) {
+			InflictDamage(20);
+			DrainMana (10);
+		}
+
 	}
 
 	void OnGUI(){
@@ -41,22 +72,49 @@ public class Healthbars : MonoBehaviour {
 		//resolution scaling
 		AutoResize (1920, 1080);
 
-		//GUI.Box (new Rect (50, 20, healthbarlength, 20), "");
-		//GUI.Box (new Rect (50, 50, manaBarLenght, 20), "");
-		GUI.DrawTexture (new Rect(142,78,(float)(1024*0.5), (float)(39 *0.375)), emptyHealth);
-		GUI.DrawTexture (new Rect(10,10,(float)(1824*0.375), (float)(289 *0.75)), HUD);
+		//HEALTH
+		GUI.DrawTexture (new Rect(171,78, (float)(1285 * 0.375), (float)(49 * 0.375)), emptyHealth, ScaleMode.ScaleAndCrop , true, 0);
+		GUI.DrawTexture (new Rect(171,78, (float)(negativeHealthLength * 0.375), (float)(49 * 0.375)), negativeHealth, ScaleMode.ScaleAndCrop, true, 0);
+		GUI.DrawTexture (new Rect(171,78, (float)(healthbarlength * 0.375), (float)(49 * 0.375)), health, ScaleMode.ScaleAndCrop, true, 0);
 
-		//GUI.DrawTexture (new Rect(150,78.5,(float)(1024*0.5), (float)(39 *0.375)), emptyHealth);
+		//MANA
+		GUI.DrawTexture (new Rect(168,103, (float)(1268 * 0.375), (float)(56 * 0.375)), emptyMana, ScaleMode.ScaleAndCrop , true, 0);
+		GUI.DrawTexture (new Rect(168,103, (float)(manaBarLength * 0.375), (float)(56 * 0.375)), mana, ScaleMode.ScaleAndCrop , true, 0);
 
+		//MAINFRAME
+		GUI.DrawTexture (new Rect(10,10,(float)(1824 * 0.375), (float)(578* 0.375)), HUD);
+
+		//LEFT PART
 		GUI.DrawTexture (new Rect(50,40,(float)(257*0.375), (float)(299 *0.375)), NecromancerHud);
 		GUI.DrawTexture (new Rect(10,10,(float)(1824*0.375), (float)(289 *0.75)), FlareEffects);
 	}
 
-	void ChangeHealthBar(int deltahealth){
+	void ChangeBars(){
 
-		curHealth += deltahealth;
+		healthbarlength = (float)((curHealth / maxHealth) * 1285);
+		manaBarLength = (float)((curMana / maxMana) * 1268);
 
-		healthbarlength = (Screen.width/2) * (curHealth/(float)maxHealth);
+		if(healthbarlength <= 0){
+			healthbarlength = 0;
+		}
+
+		if(manaBarLength <= 0){
+			healthbarlength = 0;
+		}
+	}
+
+	public void InflictDamage(float dmg){
+
+		timer = 0;
+		timer += Time.deltaTime;
+
+
+		curHealth -= dmg;
+	}
+
+	void DrainMana(float drain){
+
+		curMana -= drain;
 
 	}
 
