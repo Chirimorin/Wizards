@@ -99,7 +99,7 @@ public class Healthbars : MonoBehaviour {
 		}
 
 		if(manaBarLength <= 0){
-			healthbarlength = 0;
+			manaBarLength = 0;
 		}
 	}
 

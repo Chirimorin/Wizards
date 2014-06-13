@@ -16,6 +16,7 @@ public class CharControlMod : MonoBehaviour {
 	//Jumping
 	public int jumpheight;
 	private Raycast cast;
+	private float offGroundTimer;
 	// Camera
 	public Camera cam;
 
@@ -65,8 +66,21 @@ public class CharControlMod : MonoBehaviour {
 		}*/
 		
 		//if (networkView.isMine) {
-			xAxisMovement ();
-			Jump ();
+		xAxisMovement ();
+		Jump ();
+		if (Aired ()) {
+			offGroundTimer += Time.deltaTime;
+			//Debug.Log (offGroundTimer);
+		} else {
+			offGroundTimer = 0;
+		}
+
+		if(Input.GetButton ("Jump") && verticalVelocity < -0.1){
+			Debug.Log (verticalVelocity);
+			rigidbody2D.gravityScale = 0.8f;
+		}else{
+			rigidbody2D.gravityScale = 1f;
+		}
 			//cam.enabled = true;
 		//} else {
 			//cam.enabled = false;
@@ -121,7 +135,7 @@ public class CharControlMod : MonoBehaviour {
 	
 	
 	void Jump(){
-		if (Input.GetButtonDown ("Jump") && !Aired () && verticalVelocity < 0.1f && Input.GetAxisRaw ("Vertical") != -1) {
+		if (Input.GetButtonDown ("Jump") && /*!Aired ()*/offGroundTimer < 0.1f && verticalVelocity < 0.1f && Input.GetAxisRaw ("Vertical") != -1) {
 			rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
 		} else if (Input.GetButtonDown ("Jump") && Input.GetAxisRaw ("Vertical") == -1) {
 			return;

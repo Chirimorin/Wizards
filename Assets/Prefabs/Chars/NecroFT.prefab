@@ -218,15 +218,15 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 2
+  m_LinearDrag: 1.29999995
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -282,7 +282,7 @@ MonoBehaviour:
   acceleration: 0
   brakeSpeed: 0
   targetSpeed: 0
-  jumpheight: 400
+  jumpheight: 500
   cam: {fileID: 2000000}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -337,6 +337,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 100
+  healthbarlength: 0
+  negativeHealthLength: 0
+  width: 1024
+  timer: 0
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
