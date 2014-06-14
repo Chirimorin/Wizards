@@ -70,17 +70,24 @@ public class CharControlMod : MonoBehaviour {
 		Jump ();
 		if (Aired ()) {
 			offGroundTimer += Time.deltaTime;
-			//Debug.Log (offGroundTimer);
+
 		} else {
 			offGroundTimer = 0;
 		}
 
+
 		if(Input.GetButton ("Jump") && verticalVelocity < -0.1){
-			Debug.Log (verticalVelocity);
-			rigidbody2D.gravityScale = 0.8f;
+			//Debug.Log (verticalVelocity);
+			rigidbody2D.gravityScale = 2.1f;
+		}else if(Input.GetButton("Jump") && offGroundTimer > 0.5f ){
+			rigidbody2D.mass = 1.5f;
+			Debug.Log ("wopper");
+			//rigidbody2D.gravityScale = 2.5f;
 		}else{
-			rigidbody2D.gravityScale = 1f;
+			//rigidbody2D.gravityScale = 3f;
+			rigidbody2D.mass = 2f;
 		}
+
 			//cam.enabled = true;
 		//} else {
 			//cam.enabled = false;
