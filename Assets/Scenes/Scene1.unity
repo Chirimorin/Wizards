@@ -509,7 +509,7 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 241777940}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6b9813cf5548ac24cae4ab2872b580d1, type: 2}
   m_IsTrigger: 0
   m_Size: {x: 1, y: 1}
   m_Center: {x: -2.38418579e-07, y: 1.1920929e-07}
@@ -2925,6 +2925,10 @@ Prefab:
     - target: {fileID: 400000, guid: bf8a661718c5b8b4f8c7a28376023f18, type: 2}
       propertyPath: m_LocalScale.y
       value: .25593701
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100002, guid: bf8a661718c5b8b4f8c7a28376023f18, type: 2}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf8a661718c5b8b4f8c7a28376023f18, type: 2}

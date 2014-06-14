@@ -66,7 +66,7 @@ public class CharControlMod : MonoBehaviour {
 		}*/
 		
 		//if (networkView.isMine) {
-		xAxisMovement ();
+		//xAxisMovement ();
 		Jump ();
 		if (Aired ()) {
 			offGroundTimer += Time.deltaTime;
@@ -87,12 +87,20 @@ public class CharControlMod : MonoBehaviour {
 			//SyncedMovement ();
 		//}
 	}
-	
+
+	void FixedUpdate(){
+		xAxisMovement ();
+		//if (Input.GetKeyDown ("a")) {
+		//	rigidbody2D.position += new Vector2(2.0f, 0);
+		//}
+	}
 	
 	// Move char on x-axis
 	
 	void xAxisMovement(){
 		axis = Input.GetAxisRaw ("Horizontal");
+		rigidbody2D.position += Vector2.right * speedx *Time.deltaTime;
+		//rigidbody2D.MovePosition (rigidbody2D.position + (Vector2) vec );
 		transform.position += vec;
 		vec = new Vector3 (speedx * Time.deltaTime, speedy, 0);
 		getHorPos = transform.position;
@@ -179,11 +187,11 @@ public class CharControlMod : MonoBehaviour {
 	
 	}
 
-	void OnCollisionStay2D(Collision2D col){
-		if(col.collider.tag == "Wall"){
-			speedx = 0;
-		}
-	}
+	//void OnCollisionStay2D(Collision2D col){
+		//if(col.collider.tag == "Wall"){
+			//speedx = 0;
+	//	}
+	//}
 
 	public float HorSpeed(){
 		return speedx;
