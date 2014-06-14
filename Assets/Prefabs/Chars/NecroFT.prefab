@@ -282,7 +282,7 @@ MonoBehaviour:
   acceleration: 0
   brakeSpeed: 0
   targetSpeed: 0
-  jumpheight: 500
+  jumpheight: 1100
   cam: {fileID: 2000000}
 --- !u!114 &11400002
 MonoBehaviour:
