@@ -99,7 +99,7 @@ public class CharControlMod : MonoBehaviour {
 	
 	void xAxisMovement(){
 		axis = Input.GetAxisRaw ("Horizontal");
-		rigidbody2D.position += Vector2.right * speedx *Time.deltaTime;
+		//rigidbody2D.position += Vector2.right * speedx *Time.deltaTime;
 		//rigidbody2D.MovePosition (rigidbody2D.position + (Vector2) vec );
 		transform.position += vec;
 		vec = new Vector3 (speedx * Time.deltaTime, speedy, 0);
