@@ -7,14 +7,19 @@ public class WispAI : MonoBehaviour {
 	private float absDeltaDistanceX;
 
 	private float idleTimer;
-	private Vector3 currentPosition;
-	public float idleSpeed = 1.0f;
+	private Vector3 currentPosition, startPosition, playerCurrentPosition;
+	private Vector3 idleMovement;
+	private float speedx, speedy, randomX, randomY;
 
+	public float fireSpeed = 12.5f;	
+	public float chaseSpeed = 2.5f;
+	public float chargeUpTimer;
 	public float Health;
 
 	// Use this for initialization
 	void Start () {
 		Health = 100f;
+		startPosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -34,28 +39,54 @@ public class WispAI : MonoBehaviour {
 		} else {
 			MoveAttackState (); 
 		}
+		//Debug.Log ("Timer is: " + idleTimer);
 	}
 
 	void MoveIdleState(){
 		idleTimer += Time.deltaTime;
+		idleMovement = new Vector3(speedx * Time.deltaTime, speedy * Time.deltaTime, 0);
+		transform.position += idleMovement;
+		bool newRandom = true;
 
-		if(idleTimer > Random.Range (3f, 5f)){
-			idleTimer = 0;
+		if(Mathf.Abs(transform.position.x - startPosition.x) < 0.5f && Mathf.Abs(transform.position.y - startPosition.y) < 0.5f){
+			if(idleTimer > Random.Range (3f, 5f)){
+				if(speedx != 0 || speedy != 0){newRandom = false;}
+				if(newRandom){
+					randomX = Random.Range (-0.25f, 0.25f);
+					randomY = Random.Range (-0.25f, 0.25f);
+					Debug.Log ("RandomX speed: " + randomX);
+				}
+				speedx = randomX; 
+				speedy = randomY;
+				if(idleTimer > Random.Range (5.1f, 6.1f)){
+					idleTimer = Random.Range (-2f, 1f);
+					newRandom = true;
+					speedx = 0;
+					speedy = 0;
+				}
+			}
+		}else{
 			currentPosition = transform.position;
-			float pathlength = Vector3.Distance (currentPosition, transform.position + new Vector3(-0.5f, 0, 0));
-			float distanceCovered = idleSpeed * Time.deltaTime; 
-			float fracJourney = distanceCovered / pathlength;
-			Debug.Log (currentPosition);
-			transform.position = Vector3.Lerp (currentPosition, transform.position + new Vector3(-5f, 0, 0), Time.deltaTime);
+			transform.position = Vector3.MoveTowards (currentPosition, startPosition, 1.0f * Time.deltaTime);
+			Debug.Log ("Out of bounds");
 		}
+			
 	}
 
 	void MoveChasingState(){
-
+		transform.position = Vector3.MoveTowards (transform.position, player.transform.position, chaseSpeed * Time.deltaTime);
+		playerCurrentPosition = player.transform.position;
 	}
 
 	void MoveAttackState(){
-
+		chargeUpTimer += Time.deltaTime;
+		if(chargeUpTimer > 1f){
+			transform.position = Vector3.MoveTowards (transform.position, playerCurrentPosition, fireSpeed * Time.deltaTime);
+			if(playerCurrentPosition == transform.position){
+				
+				chargeUpTimer = 0;
+			}
+		}
 	}
 
 	void AddDamage(float damage){
