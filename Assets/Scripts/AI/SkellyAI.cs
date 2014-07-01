@@ -127,16 +127,10 @@ public class SkellyAI : MonoBehaviour {
 		} else {
 			if ( DS.IsSolid(new Vector2 (parent.transform.position.x + goalDistance, transform.position.y), 1f) && 
 			    (((transform.position.x - parent.transform.position.x - goalDistance) * -axis) > 0.5f)){
-				Debug.Log(transform.position.x - parent.transform.position.x - goalDistance);
 				jump = true;
 				move = true;
 			}
-			//else if ((transform.position.x - parent.transform.position.x - goalDistance) > 0.5f) {
-			//	Debug.Log("distance: " + ((transform.position.x - parent.transform.position.x - goalDistance) * axis) + " move true");
-			//	move = true;
-			//}
 			else {
-				Debug.Log("distance: " + ((transform.position.x - parent.transform.position.x - goalDistance) * axis) + " move false");
 				move = false;
 			}
 		}
