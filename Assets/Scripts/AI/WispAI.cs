@@ -7,6 +7,8 @@ public class WispAI : MonoBehaviour {
 	private float absDeltaDistanceX;
 
 	private float idleTimer;
+	private Vector3 currentPosition;
+	public float idleSpeed = 1.0f;
 
 	public float Health;
 
@@ -36,9 +38,15 @@ public class WispAI : MonoBehaviour {
 
 	void MoveIdleState(){
 		idleTimer += Time.deltaTime;
+
 		if(idleTimer > Random.Range (3f, 5f)){
-			Debug.Log (idleTimer);
-			transform.position = Vector2.Lerp (transform.position, transform.position + new Vector3(-0.5f, 0, 0), 2f);
+			idleTimer = 0;
+			currentPosition = transform.position;
+			float pathlength = Vector3.Distance (currentPosition, transform.position + new Vector3(-0.5f, 0, 0));
+			float distanceCovered = idleSpeed * Time.deltaTime; 
+			float fracJourney = distanceCovered / pathlength;
+			Debug.Log (currentPosition);
+			transform.position = Vector3.Lerp (currentPosition, transform.position + new Vector3(-5f, 0, 0), Time.deltaTime);
 		}
 	}
 
