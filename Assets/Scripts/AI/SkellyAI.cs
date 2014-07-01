@@ -131,10 +131,10 @@ public class SkellyAI : MonoBehaviour {
 				jump = true;
 				move = true;
 			}
-			else if ((transform.position.x - parent.transform.position.x - goalDistance) > 0.5f) {
-				Debug.Log("distance: " + ((transform.position.x - parent.transform.position.x - goalDistance) * axis) + " move true");
-				move = true;
-			}
+			//else if ((transform.position.x - parent.transform.position.x - goalDistance) > 0.5f) {
+			//	Debug.Log("distance: " + ((transform.position.x - parent.transform.position.x - goalDistance) * axis) + " move true");
+			//	move = true;
+			//}
 			else {
 				Debug.Log("distance: " + ((transform.position.x - parent.transform.position.x - goalDistance) * axis) + " move false");
 				move = false;

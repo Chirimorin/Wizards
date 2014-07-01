@@ -17,7 +17,7 @@ public class DetectionScript : MonoBehaviour {
 	void Start () {
 		coll = GetComponent<BoxCollider2D>();
 		extents = this.GetComponent<BoxCollider2D>().size * 0.5f;
-		bottomLeft = new Vector3(-extents.x * transform.lossyScale.x, -extents.y * transform.lossyScale.x, 0f);
+		bottomLeft = new Vector3(-extents.x * transform.lossyScale.x, -extents.y * transform.lossyScale.y, 0f);
 		bottomRight = new Vector3(extents.x * transform.lossyScale.x, -extents.y * transform.lossyScale.y, 0f);
 
 		groundLayers = (LayerMask)0;
@@ -52,7 +52,7 @@ public class DetectionScript : MonoBehaviour {
 		Vector2 pos = new Vector2 (
 			(transform.position.x + ((extents.x + distance) * transform.lossyScale.x)),
 			(transform.position.y - (extents.y * transform.localScale.y)));
-		Debug.DrawRay (pos, -Vector2.up * 0.1f, Color.red);
+		Debug.DrawRay (pos, -Vector2.up * 0.1f, Color.white);
 		
 		return Physics2D.Raycast(pos, -Vector2.up, 0.1f, groundLayers);
 	}
