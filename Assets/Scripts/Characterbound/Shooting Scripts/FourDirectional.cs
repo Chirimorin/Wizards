@@ -12,7 +12,7 @@ public class FourDirectional : MonoBehaviour {
 
 	private float timeStamp;
 	private Animator anim;
-
+	private Animator ProjectileAnim;
 	private float verticalVelo;
 
 
@@ -67,15 +67,16 @@ public class FourDirectional : MonoBehaviour {
 	void ShootHorizontalIdle(){
 		if (transform.lossyScale.x < 0) {
 			anim.SetTrigger ("IdleShoot");
-			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (-1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
-			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-50000, 0) * Time.deltaTime);
+			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (-1, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
+			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-25000, 0) * Time.deltaTime);
+			ProjectileInstance.transform.localScale = new Vector3(-1, 1, 1);
 
 			//will figure this out later
 			//ProjectileInstance.transform.position = Vector3.Lerp (transform.position + new Vector3 (-1f, 0, 0f),(Vector3)(ProjectileInstance.transform.position + new Vector3(-5,0,0)), 200.0f);
 		}else if (transform.lossyScale.x > 0) {
 			anim.SetTrigger ("IdleShoot");
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
-			ProjectileInstance.rigidbody2D.AddForce(new Vector2(50000,0) * Time.deltaTime);
+			ProjectileInstance.rigidbody2D.AddForce(new Vector2(25000,0) * Time.deltaTime);
 		}
 
 
@@ -84,11 +85,12 @@ public class FourDirectional : MonoBehaviour {
 	void ShootHorizontalMoving(){
 		if (transform.lossyScale.x < 0 ) {
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (-1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
-			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-50000f, 0) * Time.deltaTime);
+			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-25000f, 0) * Time.deltaTime);
+			ProjectileInstance.transform.localScale = new Vector3(-1, 1, 1);
 		}
 		if (transform.lossyScale.x > 0 ) {
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
-			ProjectileInstance.rigidbody2D.AddForce(new Vector2(50000, 0) * Time.deltaTime);
+			ProjectileInstance.rigidbody2D.AddForce(new Vector2(25000, 0) * Time.deltaTime);
 		}
 
 
@@ -104,8 +106,6 @@ public class FourDirectional : MonoBehaviour {
 		ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, 1f, 0f), Quaternion.Euler (0,0,0)) as GameObject;
 		ProjectileInstance.rigidbody2D.AddForce(new Vector2(0, 50000) * Time.deltaTime);
 	}
-
-
 
 
 }

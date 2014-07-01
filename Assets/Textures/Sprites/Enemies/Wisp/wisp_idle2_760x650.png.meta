@@ -1,0 +1,346 @@
+fileFormatVersion: 2
+guid: 3697c50790c633c48948783e3a26e814
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 1000
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: wisp_idle2_760x650_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3250
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_1
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 3250
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_2
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 3250
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_3
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 3250
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_4
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 3250
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2600
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_6
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 2600
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_7
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 2600
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_8
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 2600
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_9
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 2600
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1950
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_11
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 1950
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_12
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 1950
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_13
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 1950
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_14
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 1950
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1300
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_16
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 1300
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_17
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 1300
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_18
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 1300
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_19
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 1300
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 650
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_21
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 650
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_22
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 650
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_23
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 650
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_24
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 650
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_26
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 0
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_27
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 0
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_28
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 0
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: wisp_idle2_760x650_29
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 0
+        width: 760
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

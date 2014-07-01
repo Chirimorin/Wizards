@@ -4,15 +4,19 @@ using System.Collections;
 public class DestroySingleEnergy : MonoBehaviour {
 
 	public GameObject particle;
-
+	private Animator ProjAnim;
+	private float timer;
 	// Use this for initialization
 	void Start () {
-	
+		ProjAnim = GetComponent<Animator>() as Animator;
+		timer = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Destroy (this.gameObject, 0.2f);
+		timer += Time.deltaTime;
+		ProjAnim.SetFloat ("Timer", timer);
+		Destroy (this.gameObject, 1f);
 		Destroy (particle, 3f);
 	}
 	void OnCollisionEnter2D(Collision2D col){
