@@ -67,7 +67,7 @@ public class FourDirectional : MonoBehaviour {
 	void ShootHorizontalIdle(){
 		if (transform.lossyScale.x < 0) {
 			anim.SetTrigger ("IdleShoot");
-			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (-1, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
+			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, 0, 5f), Quaternion.Euler (0,0,0)) as GameObject;
 			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-25000, 0) * Time.deltaTime);
 			ProjectileInstance.transform.localScale = new Vector3(-1, 1, 1);
 
@@ -75,7 +75,7 @@ public class FourDirectional : MonoBehaviour {
 			//ProjectileInstance.transform.position = Vector3.Lerp (transform.position + new Vector3 (-1f, 0, 0f),(Vector3)(ProjectileInstance.transform.position + new Vector3(-5,0,0)), 200.0f);
 		}else if (transform.lossyScale.x > 0) {
 			anim.SetTrigger ("IdleShoot");
-			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
+			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, 0, 5f), Quaternion.Euler (0,0,0)) as GameObject;
 			ProjectileInstance.rigidbody2D.AddForce(new Vector2(25000,0) * Time.deltaTime);
 		}
 
@@ -84,12 +84,12 @@ public class FourDirectional : MonoBehaviour {
 
 	void ShootHorizontalMoving(){
 		if (transform.lossyScale.x < 0 ) {
-			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (-1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
+			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, 0, 5f), Quaternion.Euler (0,0,0)) as GameObject;
 			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-25000f, 0) * Time.deltaTime);
 			ProjectileInstance.transform.localScale = new Vector3(-1, 1, 1);
 		}
 		if (transform.lossyScale.x > 0 ) {
-			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (1f, 0, 0f), Quaternion.Euler (0,0,0)) as GameObject;
+			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, 0, 5f), Quaternion.Euler (0,0,0)) as GameObject;
 			ProjectileInstance.rigidbody2D.AddForce(new Vector2(25000, 0) * Time.deltaTime);
 		}
 

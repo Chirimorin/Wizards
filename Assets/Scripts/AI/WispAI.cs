@@ -81,7 +81,11 @@ public class WispAI : MonoBehaviour {
 	void MoveAttackState(){
 		chargeUpTimer += Time.deltaTime;
 		if(chargeUpTimer > 1f){
-			transform.position = Vector3.MoveTowards (transform.position, playerCurrentPosition, fireSpeed * Time.deltaTime);
+			//transform.position = Vector3.MoveTowards (transform.position, playerCurrentPosition, fireSpeed * Time.deltaTime);
+			
+			Vector3 shootDirection = playerCurrentPosition - transform.position;
+			Vector3 normShDir = shootDirection.normalized;
+			rigidbody2D.AddForce(normShDir * 1000f * Time.deltaTime);
 			if(playerCurrentPosition == transform.position){
 				
 				chargeUpTimer = 0;
