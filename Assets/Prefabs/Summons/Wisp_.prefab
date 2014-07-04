@@ -14,7 +14,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 114: {fileID: 11400000}
   m_Layer: 11
-  m_Name: Wisp
+  m_Name: Wisp_
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.68104839, y: -.829134822, z: 0}
+  m_LocalPosition: {x: 9.47714806, y: -1.65506184, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,7 +56,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: d891d18c66a60c946a5ae9d041cc83a6, type: 2}
   m_IsTrigger: 0
-  m_Size: {x: .75999999, y: .649999976}
+  m_Size: {x: .360000014, y: .529999971}
   m_Center: {x: 0, y: 0}
 --- !u!95 &9500000
 Animator:
@@ -80,13 +80,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cecf1e8507b7b8948b965f454bb446ed, type: 3}
+  m_Script: {fileID: 11500000, guid: fbd55bfe5da369f42b8ef4730068ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireSpeed: 10
-  chaseSpeed: 2.5
-  chargeUpTimer: 0
-  Health: 0
+  chaseSpeed: .00999999978
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -44,6 +44,7 @@ public class CharControlMod : MonoBehaviour {
 		acceleration = 0.67f;
 		targetSpeed = 5f;
 		brakeSpeed = 1.00f;
+		rigidbody2D.gravityScale = 2.1f;
 	}
 	
 	// Update is called once per frame
