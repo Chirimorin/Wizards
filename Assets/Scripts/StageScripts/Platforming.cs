@@ -5,11 +5,11 @@ public class Platforming : MonoBehaviour {
 
 
 
-	private bool triggered;
+	private static bool triggered;
 	private float verticalSpeed;
 	private GameObject parent;
 
-	private float verticalDifference;
+	private static float verticalDifference;
 
 
 	// Use this for initialization
@@ -39,7 +39,7 @@ public class Platforming : MonoBehaviour {
 		if(verticalDifference > 0.70f && Input.GetButtonDown ("Jump") && Input.GetAxisRaw ("Vertical") == -1){ //drop logix
 			Debug.Log ("Drop");
 			triggered = false;
-		}else if (verticalSpeed < 1 && verticalDifference > 0.70f) {
+		}else if (verticalSpeed < 1 && verticalDifference > 0.7f) {
 			triggered = false;
 		}
 
@@ -54,7 +54,7 @@ public class Platforming : MonoBehaviour {
 		//shut trigger off niet vergeten on exit/enter
 
 
-		//Debug.Log (triggered);
+		Debug.Log (verticalDifference);
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
@@ -76,7 +76,7 @@ public class Platforming : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D col){
 		if (col.name == "NecroFT(Clone)") {
 			Debug.Log ("exit");
-			triggered = false;
+			//triggered = false;
 		}
 	}
 
