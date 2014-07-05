@@ -23,6 +23,7 @@ public class WispCoAI : MonoBehaviour {
 	private bool idleState;
 	private bool fired;
 	private float diveStateTimer = 0f;
+	private float health = 20f;
 
 	private GameObject player;
 	private Healthbars playerHealth;
@@ -81,6 +82,12 @@ public class WispCoAI : MonoBehaviour {
 		if(diveStateTimer != 0){
 			Debug.Log (diveStateTimer);
 		}
+		
+		Debug.Log (health);
+		//Destroy instance on health = 0
+		if(health <= 0){
+			DestroyObject (this.gameObject);
+		}
 
 	}
 
@@ -123,6 +130,7 @@ public class WispCoAI : MonoBehaviour {
 	}
 
 	IEnumerator DiveState(){
+		yield return RecoverState ();
 		yield return new WaitForSeconds (1f);
 		fired = true;
 		DiveAtPosition = player.transform.position - transform.position;
@@ -181,6 +189,10 @@ public class WispCoAI : MonoBehaviour {
 
 		StartCoroutine("RecoverState");
 
+		if(col.collider.name == "Skull Projectile(Clone)"){
+			health -= ProjectileProperties.GetSkullDamage();
+			Debug.Log (health);
+		}
 	}
 
 }

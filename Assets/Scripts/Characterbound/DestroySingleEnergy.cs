@@ -21,13 +21,15 @@ public class DestroySingleEnergy : MonoBehaviour {
 	}
 	void OnCollisionEnter2D(Collision2D col){
 		if (col.collider.name == "Cube") {
-			Destroy (this.gameObject);
+			DestroyObject (this.gameObject);
 			Instantiate(particle, this.gameObject.transform.position, Quaternion.Euler (0,0,0));  
 		} else if (col.collider.name == "Floor") {
-			Destroy (this.gameObject);
+			DestroyObject (this.gameObject);
 		} else if (col.collider.name == "MoveTowards") {
-			Destroy (this.gameObject);
+			DestroyObject (this.gameObject);
 			Instantiate(particle, this.gameObject.transform.position, Quaternion.Euler (0,0,0));
+		} else if (col.collider.name == "Wisp_"){
+			//DestroyObject (this.gameObject);
 		}
 			
 

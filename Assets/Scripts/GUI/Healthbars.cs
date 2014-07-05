@@ -61,7 +61,6 @@ public class Healthbars : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown ("Fire1")) {
-			InflictDamage(20);
 			DrainMana (10);
 		}
 
