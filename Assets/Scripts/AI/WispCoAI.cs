@@ -184,15 +184,22 @@ public class WispCoAI : MonoBehaviour {
 			chaseAble = false;
 			StopCoroutine("DiveState");
 			StopCoroutine("ChaseState");
-			playerHealth.InflictDamage (10);
+			if(playerHealth){
+				playerHealth.InflictDamage (10);
+			}
+
+
 		}
 
 		StartCoroutine("RecoverState");
 
 		if(col.collider.name == "Skull Projectile(Clone)"){
-			health -= ProjectileProperties.GetSkullDamage();
-			Debug.Log (health);
+			inflictDamage (10);
 		}
+	}
+
+	public void inflictDamage(float damage){
+		health -= damage;
 	}
 
 }

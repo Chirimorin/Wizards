@@ -38,10 +38,11 @@ public class Platforming : MonoBehaviour {
 
 		if(verticalDifference > 0.70f && Input.GetButtonDown ("Jump") && Input.GetAxisRaw ("Vertical") == -1){ //drop logix
 			Debug.Log ("Drop");
-			triggered = false;
-		}else if (verticalSpeed < 1 && verticalDifference > 0.7f) {
+			Physics2D.IgnoreLayerCollision (8,9);
+		}else if (verticalSpeed < 1 && verticalDifference > 0.7f && verticalDifference < 1.2f) {
 			triggered = false;
 		}
+
 
 		//Debug.Log (verticalSpeed);
 		if (!triggered) {
@@ -54,7 +55,7 @@ public class Platforming : MonoBehaviour {
 		//shut trigger off niet vergeten on exit/enter
 
 
-		Debug.Log (verticalDifference);
+		//Debug.Log (verticalDifference);
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
