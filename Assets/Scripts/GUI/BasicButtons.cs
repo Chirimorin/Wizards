@@ -6,14 +6,16 @@ public class BasicButtons : MonoBehaviour {
 	private string IP = "192.168.1.9";
 	private int port = 25565;
 	private string portholder = "2";
-	public GameObject playerPrefab;
+	public GameObject Phil;
+	public GameObject Mya;
 	private GameObject playerins;
 
 	private bool initServerShow = false;
 	private bool connectServerShow = false;
+	private bool chosen;
 	// Use this for initialization
 	void Start () {
-		SpawnPlayer (-3,-2);
+
 	}
 	
 	// Update is called once per frame
@@ -21,74 +23,34 @@ public class BasicButtons : MonoBehaviour {
 
 	}
 
-	void SpawnPlayer(float x, float y){
-		playerins = Instantiate (playerPrefab, new Vector3 (x, y, 0), Quaternion.Euler (0,0,0)) as GameObject;
+	void SpawnPlayer(float x, float y, GameObject prefab){
+		playerins = Instantiate (prefab, new Vector3 (x, y, 0), Quaternion.Euler (0,0,0)) as GameObject;
 
 	}
 
 
 	void OnGUI()
 	{
-		/*
-		if(Network.peerType == NetworkPeerType.Disconnected)
-		{
 
 
+		if(!chosen){
 			//INIT
-			if(GUI.Button (new Rect(100, 100, 100, 35), "Init Server"))
+			if(GUI.Button (new Rect(100, 100, 100, 35), "Phil"))
 			{
-				initServerShow = true;
-				connectServerShow = false;
-			}
-
-			if(initServerShow){
-
-
-				if(GUI.Button (new Rect(300, 100, 100,35), "Host!")){
-					Network.InitializeServer(2, port);
-				}
+				SpawnPlayer(-3, -2, Phil);
+				chosen = true;
 			}
 
 
 			//CONNECT
-			if(GUI.Button (new Rect(100, 200, 100, 35), "Connect Server"))
+			if(GUI.Button (new Rect(100, 200, 100, 35), "Mya"))
 			{
-				connectServerShow = true;
-				initServerShow = false;
+				SpawnPlayer (-3,-2, Mya);
+				chosen = true;
 			}
-
-			if(connectServerShow){
-
-				IP = GUI.TextField (new Rect(200,200,100,35), IP);
-				if(GUI.Button ( new Rect (300, 200, 100, 35), "Connect!")){
-					Network.Connect (IP, port);
-				}
-			}
-
-		}else{
-			if(Network.peerType == NetworkPeerType.Client)
-			{
-				GUI.Label(new Rect(100,200, 100, 35), "Client");
-
-				if(GUI.Button (new Rect(100, 300, 100, 35), "Logout"))
-				{
-					Network.Disconnect ();
-				}
-			}
-
-			if(Network.peerType == NetworkPeerType.Server)
-			{
-				GUI.Label(new Rect(100,100, 100, 35), "Host, connections: " + Network.connections.Length);
-
-				if(GUI.Button (new Rect(100, 300, 100, 35), "Destroy"))
-				{
-					Network.Disconnect ();
-
-				}
+		}
 
 
-			}
-		}*/
 	}
 	/*
 	void OnServerInitialized(){
