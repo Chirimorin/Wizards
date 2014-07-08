@@ -50,8 +50,10 @@ public class WispCoAI : MonoBehaviour {
 			deltaDistanceY = Mathf.Abs(transform.position.y - player.transform.position.y);
 			playerHealth = player.GetComponent<Healthbars>();
 		}catch(UnityException e){
-			Debug.Log(e);
+				Debug.Log(e);		
 		}
+
+
 		//  
 		if(deltaDistanceX < 9f && deltaDistanceX > 4f && chaseAble == true){
 			idleState = false;

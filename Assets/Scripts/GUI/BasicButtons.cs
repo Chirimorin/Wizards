@@ -8,6 +8,7 @@ public class BasicButtons : MonoBehaviour {
 	private string portholder = "2";
 	public GameObject Phil;
 	public GameObject Mya;
+	public GameObject Susannah;
 	private GameObject playerins;
 
 	private bool initServerShow = false;
@@ -34,7 +35,7 @@ public class BasicButtons : MonoBehaviour {
 
 
 		if(!chosen){
-			//INIT
+			//PHIL
 			if(GUI.Button (new Rect(100, 100, 100, 35), "Phil"))
 			{
 				SpawnPlayer(-3, -2, Phil);
@@ -42,12 +43,20 @@ public class BasicButtons : MonoBehaviour {
 			}
 
 
-			//CONNECT
+			//MYA
 			if(GUI.Button (new Rect(100, 200, 100, 35), "Mya"))
 			{
 				SpawnPlayer (-3,-2, Mya);
 				chosen = true;
 			}
+
+			//SUSANNAH
+			if(GUI.Button (new Rect(100, 300, 100, 35), "Susannah"))
+			{
+				SpawnPlayer (10,13, Susannah);
+				chosen = true;
+			}
+
 		}
 
 
