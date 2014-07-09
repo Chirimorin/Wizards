@@ -46,6 +46,7 @@ public abstract class CharControlBase : MonoBehaviour {
 		// anim.SetFloat ("H_Speed", Mathf.Abs (speedx));
 
 		XAxisMovement ();
+		Jump ();
 	}
 
 	protected void Jump()
