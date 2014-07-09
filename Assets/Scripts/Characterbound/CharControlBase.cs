@@ -42,11 +42,12 @@ public abstract class CharControlBase : MonoBehaviour {
 
 	protected void Update () {
 		verticalVelocity = rigidbody2D.velocity.y;
-
 		// anim.SetFloat ("H_Speed", Mathf.Abs (speedx));
-
-		XAxisMovement ();
 		Jump ();
+	}
+
+	protected void FixedUpdate(){
+		XAxisMovement ();
 	}
 
 	protected void Jump()
@@ -71,7 +72,7 @@ public abstract class CharControlBase : MonoBehaviour {
 		if (axis < -0.5) {
 			speedx -= acceleration;
 			Vector3 rotate = transform.localScale;
-			rotate.x = -0.5f;
+			rotate.x *= -1f;
 			transform.localScale = rotate;
 			if (speedx < maxSpeed * -1) {
 				speedx = -1 * maxSpeed;
@@ -81,7 +82,7 @@ public abstract class CharControlBase : MonoBehaviour {
 		} else if (axis > 0.5) {
 			speedx += acceleration;
 			Vector3 rotate2 = transform.localScale;
-			rotate2.x = 0.5f;
+			rotate2.x *= -1f;
 			transform.localScale = rotate2;
 			if(speedx > maxSpeed){
 				speedx = maxSpeed;
