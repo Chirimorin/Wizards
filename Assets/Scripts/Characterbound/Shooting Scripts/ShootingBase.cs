@@ -11,57 +11,85 @@ public class ShootingBase : MonoBehaviour {
 	
 	private bool aired;
 	public float gravityScale = 0; //shoot in straight line at default
-	public float homing;
-	public float autofire;
+	public float VerticalHoming;
+	public bool autofire;
 
 	public float cooldown;
 	private float timeStamp;
 	private float verticalVelo;
-	
+
+	protected GameObject[] enemies;
 	
 	// Use this for initialization
 	protected void Start () {
 		MoveControl = GetComponent<CharControlBase> ();
+		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 	}
 	
 	// Update is called once per frame
 	protected void Update () {
 
-		//TODO Homing;
-		//TODO Autofire;
+		//TODO Homing improvement;
+
+		foreach(GameObject enemy in enemies){
+			if(Vector3.Distance (transform.position, enemy.transform.position) < 4f && VerticalHoming != null && ProjectileInstance){
+				ProjectileInstance.rigidbody2D.AddRelativeForce (new Vector2(0, VerticalHoming));
+			}
+		}
+	
+
 
 		if(ProjectileInstance){
 			ProjectileInstance.rigidbody2D.gravityScale = gravityScale;
 		}
 
 		verticalVelo = rigidbody2D.velocity.y;
+		if(!autofire){
+			//shoot horizontal idle
+			if(Time.time > timeStamp && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == 0){
+				timeStamp = Time.time + cooldown;
+				
+				ShootHorizontal ();
+			}
 
-		//shoot horizontal idle
-		if(Time.time > timeStamp && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == 0){
-			timeStamp = Time.time + cooldown;
+			//JumpShoot
+			if (Time.time > timeStamp && MoveControl.Aired && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == -1) {
+				timeStamp = Time.time + cooldown;
+				JumpShoot ();
+			}
 			
-			ShootHorizontal ();
+			
+			//shoot upward
+			if (Time.time > timeStamp && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == 1) {
+				timeStamp = Time.time + cooldown;
+				ShootUp ();
+			}
+		}else{
+			if(Time.time > timeStamp && Input.GetButton ("Fire1") && Input.GetAxisRaw ("Vertical") == 0){
+				timeStamp = Time.time + cooldown;
+				
+				ShootHorizontal ();
+			}
+			
+			//JumpShoot
+			if (Time.time > timeStamp && MoveControl.Aired && Input.GetButton ("Fire1") && Input.GetAxisRaw ("Vertical") == -1) {
+				timeStamp = Time.time + cooldown;
+				JumpShoot ();
+			}
+			
+			
+			//shoot upward
+			if (Time.time > timeStamp && Input.GetButton ("Fire1") && Input.GetAxisRaw ("Vertical") == 1) {
+				timeStamp = Time.time + cooldown;
+				ShootUp ();
+			}
 		}
-
-		//JumpShoot
-		if (Time.time > timeStamp && MoveControl.Aired && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == -1) {
-			timeStamp = Time.time + cooldown;
-			JumpShoot ();
-		}
-		
-		
-		//shoot upward
-		if (Time.time > timeStamp && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == 1) {
-			timeStamp = Time.time + cooldown;
-			ShootUp ();
-		}
-
 	}
 	
 	protected void ShootHorizontal(){
 		if (transform.lossyScale.x < 0) {
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, 0, 5f), Quaternion.Euler (0,0,0)) as GameObject;
-			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-1000 * power, 0) * Time.deltaTime);
+			ProjectileInstance.rigidbody2D.AddForce(new Vector2(-1000 * power,0) * Time.deltaTime);
 		}else if (transform.lossyScale.x > 0) {
 			ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, 0, 5f), Quaternion.Euler (0,0,0)) as GameObject;
 			ProjectileInstance.rigidbody2D.AddForce(new Vector2(1000 * power,0) * Time.deltaTime);
