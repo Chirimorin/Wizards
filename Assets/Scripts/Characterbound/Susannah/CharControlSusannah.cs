@@ -11,7 +11,7 @@ public class CharControlSusannah : CharControlBase {
 		acceleration = 0.67f;
 		maxSpeed = 5f;
 		brakeSpeed = 1f;
-		jumpheight = 0;
+		jumpheight = 800;
 		rigidbody2D.gravityScale = 2.1f;
 	}
 	
