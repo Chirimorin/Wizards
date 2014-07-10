@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Start2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,7 +23,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: End2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Start1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: End1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - 124: {fileID: 12400000}
   - 92: {fileID: 9200000}
   - 81: {fileID: 8100000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Susannah
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 838f47e4e7c3e4e48991e8a83c311a79, type: 3}
   m_Name: 
@@ -367,8 +367,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f5aff47ef29e04d9d6c2b8d65d22a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  power: 0
   projectile: {fileID: 100000, guid: 865d300bc742f1649b12b0a7807408c2, type: 2}
   gravityScale: 0
+  homing: 0
+  autofire: 0
   cooldown: 0
 --- !u!124 &12400000
 Behaviour:

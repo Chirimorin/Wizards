@@ -10,6 +10,7 @@ public class CharControlSusannah : CharControlBase {
 		brakeSpeed = 1f;
 		jumpheight = 800;
 		baseGravity = 2.1f;
+		floatyness = 0;
 		base.Start ();
 	}
 	
