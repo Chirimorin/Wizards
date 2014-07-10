@@ -122,7 +122,7 @@ public abstract class CharControlBase : MonoBehaviour {
 		} else if (axis > 0.5) {
 			speedx += acceleration;
 			Vector3 rotate2 = transform.localScale;
-			rotate2.x = -1f;
+			rotate2.x = 1f;
 			transform.localScale = rotate2;
 			if(speedx > maxSpeed){
 				speedx = maxSpeed;
