@@ -3,8 +3,8 @@ using System.Collections;
 
 public abstract class CharControlBase : MonoBehaviour {
 	// Basic movement
-	public float speedx;
-	public float speedy;
+	protected float speedx;
+	protected float speedy;
 	public float acceleration;
 	public float brakeSpeed;
 	public float maxSpeed;
@@ -21,11 +21,15 @@ public abstract class CharControlBase : MonoBehaviour {
 
 	private LayerMask groundLayers;
 
-	//Platforming
+	// Platforming
 	private float verticalVelocity;
 
 	// Animations
 	private Animator anim;
+
+	// Stuff
+	public float Speedx { get { return speedx; } }
+	public float Speedy { get { return speedy; } }
 
 	// Use this for initialization
 	protected void Start () {
