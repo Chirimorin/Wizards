@@ -31,6 +31,18 @@ public abstract class CharControlBase : MonoBehaviour {
 	public float Speedx { get { return speedx; } }
 	public float Speedy { get { return speedy; } }
 
+	public bool Aired { 
+		get {
+			Vector2 pos1 = transform.position + bottomLeft;
+			Vector2 pos2 = transform.position + bottomRight;
+			
+			Debug.DrawRay (pos1, -Vector2.up * 0.1f, Color.cyan);
+			Debug.DrawRay (pos2, -Vector2.up * 0.1f, Color.cyan);
+
+			return !((bool)Physics2D.Raycast(pos1, -Vector2.up, 0.1f, groundLayers) || (bool)Physics2D.Raycast(pos2, -Vector2.up, 0.1f, groundLayers));
+		}
+	}
+
 	// Use this for initialization
 	protected void Start () {
 		extents = this.GetComponent<BoxCollider2D>().size * 0.5f;
@@ -61,7 +73,7 @@ public abstract class CharControlBase : MonoBehaviour {
 		//TODO: add float logic
 		//TODO: add double jump logic
 
-		if (Input.GetButtonDown ("Jump") && !IsAired()) {
+		if (Input.GetButtonDown ("Jump") && !Aired) {
 			Debug.Log("Jumping!");
 			rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
 		}
@@ -117,16 +129,4 @@ public abstract class CharControlBase : MonoBehaviour {
 		transform.position += vec;
 	}
 
-	protected bool IsAired()
-	{
-		Vector2 pos1 = transform.position + bottomLeft;
-		Vector2 pos2 = transform.position + bottomRight;
-		
-		Debug.DrawRay (pos1, -Vector2.up * 0.1f, Color.cyan);
-		Debug.DrawRay (pos2, -Vector2.up * 0.1f, Color.cyan);
-
-		Debug.Log("left: " + (bool)Physics2D.Raycast(pos1, -Vector2.up, 0.1f, groundLayers));
-		Debug.Log("right: " + (bool)Physics2D.Raycast(pos2, -Vector2.up, 0.1f, groundLayers));
-		return !((bool)Physics2D.Raycast(pos1, -Vector2.up, 0.1f, groundLayers) || (bool)Physics2D.Raycast(pos2, -Vector2.up, 0.1f, groundLayers));
-	}
 }
