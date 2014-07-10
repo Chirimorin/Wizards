@@ -11,6 +11,8 @@ public class CharControlMya : CharControlBase {
 		acceleration = 0.67f;
 		maxSpeed = 5f;
 		brakeSpeed = 1f;
+		jumpheight = 500;
+
 	}
 	
 	// Update is called once per frame

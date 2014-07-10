@@ -3,8 +3,8 @@ using System.Collections;
 
 public abstract class CharControlBase : MonoBehaviour {
 	// Basic movement
-	protected float speedx;
-	protected float speedy;
+	public float speedx;
+	public float speedy;
 	public float acceleration;
 	public float brakeSpeed;
 	public float maxSpeed;
@@ -34,8 +34,9 @@ public abstract class CharControlBase : MonoBehaviour {
 		bottomRight = new Vector3(extents.x * transform.lossyScale.x, -extents.y * transform.lossyScale.y, 0f);
 
 		groundLayers = (LayerMask)0;
-		groundLayers |= (1 << LayerMask.NameToLayer("Default"));
+		//groundLayers |= (1 << LayerMask.NameToLayer("Default"));
 		groundLayers |= (1 << LayerMask.NameToLayer("Platforms"));
+		groundLayers |= (1 << LayerMask.NameToLayer("Floor"));
 
 		anim = gameObject.GetComponent<Animator> ();
 	}
@@ -54,17 +55,22 @@ public abstract class CharControlBase : MonoBehaviour {
 	{
 		//TODO: check jump logic
 		//TODO: add float logic
+		//TODO: add double jump logic
 
-		if (Input.GetButtonDown ("Jump") && /*!Aired ()*/offGroundTimer < 0.1f && verticalVelocity < 0.1f && Input.GetAxisRaw ("Vertical") != -1) {
+		if (Input.GetButtonDown ("Jump") && !IsAired()) {
+			Debug.Log("Jumping!");
 			rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
-		} else if (Input.GetButtonDown ("Jump") && Input.GetAxisRaw ("Vertical") == -1) {
-			return;
 		}
+
+		//if (Input.GetButtonDown ("Jump") && /*!Aired ()*/offGroundTimer < 0.1f && verticalVelocity < 0.1f && Input.GetAxisRaw ("Vertical") != -1) {
+		//	rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
+		//} else if (Input.GetButtonDown ("Jump") && Input.GetAxisRaw ("Vertical") == -1) {
+		//	return;
+		//}
 	}
 
 	protected void XAxisMovement()
 	{
-		Debug.Log ("TEST!");
 		float axis = Input.GetAxisRaw ("Horizontal");
 
 		Vector3 vec = new Vector3 (speedx * Time.deltaTime, speedy, 0);
@@ -114,6 +120,9 @@ public abstract class CharControlBase : MonoBehaviour {
 		
 		Debug.DrawRay (pos1, -Vector2.up * 0.1f, Color.cyan);
 		Debug.DrawRay (pos2, -Vector2.up * 0.1f, Color.cyan);
-		return !(Physics2D.Raycast(pos1, -Vector2.up, 0.1f, groundLayers) || Physics2D.Raycast(pos1, -Vector2.up, 0.1f, groundLayers));
+
+		Debug.Log("left: " + (bool)Physics2D.Raycast(pos1, -Vector2.up, 0.1f, groundLayers));
+		Debug.Log("right: " + (bool)Physics2D.Raycast(pos2, -Vector2.up, 0.1f, groundLayers));
+		return !((bool)Physics2D.Raycast(pos1, -Vector2.up, 0.1f, groundLayers) || (bool)Physics2D.Raycast(pos2, -Vector2.up, 0.1f, groundLayers));
 	}
 }
