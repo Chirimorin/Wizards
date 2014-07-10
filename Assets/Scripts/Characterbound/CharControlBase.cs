@@ -5,14 +5,14 @@ public abstract class CharControlBase : MonoBehaviour {
 	// Basic movement
 	protected float speedx;
 	protected float speedy;
-	public float acceleration;
-	public float brakeSpeed;
-	public float maxSpeed;
+	public float acceleration = 0f;
+	public float brakeSpeed = 0f;
+	public float maxSpeed = 0f;
 
 	// Jumping
-	public int jumpheight;
-	public float baseGravity;
-	public float floatyness; // How floaty the character is while the jump button is held. 0 = no difference. 1= no gravity. 
+	public int jumpheight = 0;
+	public float baseGravity = 0f;
+	public float floatyness = 0f; // How floaty the character is while the jump button is held. 0 = no difference. 1= no gravity. 
 	private float offGroundTimer;
 	
 	private Vector3 extents;
@@ -45,6 +45,19 @@ public abstract class CharControlBase : MonoBehaviour {
 
 	// Use this for initialization
 	protected void Start () {
+		if (acceleration == 0f)
+			Debug.Log ("Warning: acceleration not set!");
+		if (brakeSpeed == 0f)
+			Debug.Log ("Warning: brakeSpeed not set!");
+		if (maxSpeed == 0f)
+			Debug.Log ("Warning: maxSpeed not set!");
+		if (jumpheight == 0)
+			Debug.Log ("Warning: jumpheight not set!");
+		if (baseGravity == 0f)
+			Debug.Log ("Warning: baseGravity not set!");
+		if (floatyness == 0f)
+			Debug.Log ("Warning: floatyness not set!");
+
 		extents = this.GetComponent<BoxCollider2D>().size * 0.5f;
 		bottomLeft = new Vector3(-extents.x * transform.lossyScale.x, -extents.y * transform.lossyScale.y, 0f);
 		bottomRight = new Vector3(extents.x * transform.lossyScale.x, -extents.y * transform.lossyScale.y, 0f);
@@ -77,6 +90,11 @@ public abstract class CharControlBase : MonoBehaviour {
 			Debug.Log("Jumping!");
 			rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
 		}
+		if (Input.GetButton ("Jump")) {
+			rigidbody2D.gravityScale = baseGravity - (baseGravity * floatyness);
+		} else {
+			rigidbody2D.gravityScale = baseGravity;
+		}
 
 		//if (Input.GetButtonDown ("Jump") && /*!Aired ()*/offGroundTimer < 0.1f && verticalVelocity < 0.1f && Input.GetAxisRaw ("Vertical") != -1) {
 		//	rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
@@ -94,7 +112,7 @@ public abstract class CharControlBase : MonoBehaviour {
 		if (axis < -0.5) {
 			speedx -= acceleration;
 			Vector3 rotate = transform.localScale;
-			rotate.x *= -1f;
+			rotate.x = -1f;
 			transform.localScale = rotate;
 			if (speedx < maxSpeed * -1) {
 				speedx = -1 * maxSpeed;
@@ -104,7 +122,7 @@ public abstract class CharControlBase : MonoBehaviour {
 		} else if (axis > 0.5) {
 			speedx += acceleration;
 			Vector3 rotate2 = transform.localScale;
-			rotate2.x *= -1f;
+			rotate2.x = -1f;
 			transform.localScale = rotate2;
 			if(speedx > maxSpeed){
 				speedx = maxSpeed;
