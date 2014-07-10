@@ -60,7 +60,7 @@ public abstract class CharControlBase : MonoBehaviour {
 		if (floatyness == 0f)
 			Debug.LogWarning ("Warning: floatyness not set!");
 		if (numJumps == 0)
-			Debug.LogWarning ("Warning: numJumps now set!");
+			Debug.LogWarning ("Warning: numJumps not set!");
 
 		rigidbody2D.gravityScale = baseGravity;
 
@@ -93,7 +93,7 @@ public abstract class CharControlBase : MonoBehaviour {
 			jumpsDone = 1;
 		}
 
-		// Jump & multiJump
+		// Jump & multi-jump
 		if (Input.GetButtonDown ("Jump") && !Aired) {
 			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
 			rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
