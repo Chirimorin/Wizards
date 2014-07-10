@@ -93,6 +93,8 @@ GameObject:
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: Susannah
   m_TagString: Untagged
@@ -245,7 +247,7 @@ Rigidbody2D:
   m_Mass: 2
   m_LinearDrag: 1.29999995
   m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_GravityScale: 2.0999999
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -299,7 +301,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97bf7fcfba145b24e93f4c262fa317d6, type: 3}
   m_Name: 
@@ -311,6 +313,35 @@ MonoBehaviour:
   targetSpeed: 5
   jumpheight: 1100
   cam: {fileID: 2000000}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e5d1e639fee8a48a5c2d4266bc088a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceleration: .670000017
+  brakeSpeed: 1
+  maxSpeed: 5
+  jumpheight: 0
+  baseGravity: 0
+  floatyness: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4c06dcdea5f8b4e9dea320c78b2ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 100000, guid: 865d300bc742f1649b12b0a7807408c2, type: 2}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

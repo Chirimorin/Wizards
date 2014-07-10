@@ -11,12 +11,13 @@ public class CharControlSusannah : CharControlBase {
 		acceleration = 0.67f;
 		maxSpeed = 5f;
 		brakeSpeed = 1f;
+		jumpheight = 0;
+		rigidbody2D.gravityScale = 2.1f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		base.Update ();
-		base.Jump ();
 	}
 
 	void FixedUpdate(){
