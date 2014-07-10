@@ -15,6 +15,8 @@ public abstract class CharControlBase : MonoBehaviour {
 	public float floatyness = 0f; // How floaty the character is while the jump button is held. 0 = no difference. 1= no gravity. 
 	public int numJumps = 0;
 	private int jumpsDone = 0;
+	private float jumpTimer = 0f;
+	private bool jumpTimerOver = false;
 	private float offGroundTimer;
 	
 	private Vector3 extents;
@@ -88,22 +90,29 @@ public abstract class CharControlBase : MonoBehaviour {
 
 	protected void Jump()
 	{
-		if (!Aired) {
-			// Makes no sense, I know. But 0 here causes wrong jump behavior
-			jumpsDone = 1;
+		if (Aired) {
+			if (!jumpTimerOver) {
+				jumpTimer += Time.deltaTime;
+				if (jumpTimer > 0.1)
+				{
+					jumpsDone = 1;
+					jumpTimerOver = true;
+				}
+			}
+		} else { // On ground
+			// Technically this can run after a jump if FPS is high enough.
+			// It would give you 0.1s for an extra jump, jump resets vertical speed so I think it won't be noticed. 
+			jumpsDone = 0;
+			jumpTimer = 0f;
+			jumpTimerOver = false;
 		}
-
-		// Jump & multi-jump
-		if (Input.GetButtonDown ("Jump") && !Aired) {
-			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
-			rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
-
-			jumpsDone = 1;
-		} else if (Input.GetButtonDown ("Jump") && (jumpsDone < numJumps)) {
+		
+		if (Input.GetButtonDown ("Jump") && (jumpsDone < numJumps)) {
 			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
 			rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
 
 			jumpsDone++;
+			jumpTimerOver = true;
 		}
 
 		// Float (gravity is lager als jump word vastgehouden)
@@ -112,12 +121,6 @@ public abstract class CharControlBase : MonoBehaviour {
 		} else {
 			rigidbody2D.gravityScale = baseGravity;
 		}
-
-		//if (Input.GetButtonDown ("Jump") && /*!Aired ()*/offGroundTimer < 0.1f && verticalVelocity < 0.1f && Input.GetAxisRaw ("Vertical") != -1) {
-		//	rigidbody2D.AddForce (new Vector3 (0, jumpheight, 0));
-		//} else if (Input.GetButtonDown ("Jump") && Input.GetAxisRaw ("Vertical") == -1) {
-		//	return;
-		//}
 	}
 
 	protected void XAxisMovement()
