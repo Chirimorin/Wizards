@@ -32,9 +32,9 @@ public class ShootingBase : MonoBehaviour {
 		verticalVelo = rigidbody2D.velocity.y;
 		//Debug.Log (verticalVelo);
 		
-		aired = false;
+		aired = MoveControl.Aired;
 		
-		speedx = MoveControler.
+		speedx = MoveControl.Speedx;
 		
 		
 		//shoot horizontal idle
