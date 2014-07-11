@@ -17,6 +17,7 @@ public class ShootingBase : MonoBehaviour {
 	public float cooldown;
 	private float timeStamp;
 	private float verticalVelo;
+	public string button = "Fire1";
 
 	protected GameObject[] enemies;
 	
@@ -46,26 +47,26 @@ public class ShootingBase : MonoBehaviour {
 		verticalVelo = rigidbody2D.velocity.y;
 		if(!autofire){
 			//shoot horizontal idle
-			if(Time.time > timeStamp && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == 0){
+			if(Time.time > timeStamp && Input.GetButtonDown (button) && Input.GetAxisRaw ("Vertical") == 0){
 				timeStamp = Time.time + cooldown;
 				
 				ShootHorizontal ();
 			}
 
 			//JumpShoot
-			if (Time.time > timeStamp && MoveControl.Aired && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == -1) {
+			if (Time.time > timeStamp && MoveControl.Aired && Input.GetButtonDown (button) && Input.GetAxisRaw ("Vertical") == -1) {
 				timeStamp = Time.time + cooldown;
 				JumpShoot ();
 			}
 			
 			
 			//shoot upward
-			if (Time.time > timeStamp && Input.GetButtonDown ("Fire1") && Input.GetAxisRaw ("Vertical") == 1) {
+			if (Time.time > timeStamp && Input.GetButtonDown (button) && Input.GetAxisRaw ("Vertical") == 1) {
 				timeStamp = Time.time + cooldown;
 				ShootUp ();
 			}
 		}else{
-			if(Time.time > timeStamp && Input.GetButton ("Fire1") && Input.GetAxisRaw ("Vertical") == 0){
+			if(Time.time > timeStamp && Input.GetButton (button) && Input.GetAxisRaw ("Vertical") == 0){
 				timeStamp = Time.time + cooldown;
 				
 				ShootHorizontal ();
@@ -79,7 +80,7 @@ public class ShootingBase : MonoBehaviour {
 			
 			
 			//shoot upward
-			if (Time.time > timeStamp && Input.GetButton ("Fire1") && Input.GetAxisRaw ("Vertical") == 1) {
+			if (Time.time > timeStamp && Input.GetButton (button) && Input.GetAxisRaw ("Vertical") == 1) {
 				timeStamp = Time.time + cooldown;
 				ShootUp ();
 			}

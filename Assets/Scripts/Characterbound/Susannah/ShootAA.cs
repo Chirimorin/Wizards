@@ -10,6 +10,7 @@ public class ShootAA : ShootingBase {
 		power = 25f;
 		cooldown = 0.3f;
 		autofire = true;
+		button = "Fire1";
 		base.Start ();
 	}
 	
