@@ -2160,7 +2160,7 @@ GameObject:
   - 23: {fileID: 616646527}
   - 61: {fileID: 616646526}
   m_Layer: 13
-  m_Name: Cube
+  m_Name: Testvloer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
