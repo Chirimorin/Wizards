@@ -99,7 +99,7 @@ GameObject:
   - 114: {fileID: 11400010}
   m_Layer: 8
   m_Name: Susannah
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1463f56a597635546af910bba6c37b4e, type: 3}
   m_Name: 
@@ -332,6 +332,7 @@ MonoBehaviour:
   jumpheight: 800
   baseGravity: 0
   floatyness: 0
+  numJumps: 1
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -350,19 +351,21 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 838f47e4e7c3e4e48991e8a83c311a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 800
+  range: 5
+  rayPosY: .5
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2f5aff47ef29e04d9d6c2b8d65d22a1, type: 3}
   m_Name: 
@@ -370,7 +373,7 @@ MonoBehaviour:
   power: 0
   projectile: {fileID: 100000, guid: 865d300bc742f1649b12b0a7807408c2, type: 2}
   gravityScale: 0
-  homing: 0
+  VerticalHoming: 0
   autofire: 0
   cooldown: 0
 --- !u!124 &12400000
