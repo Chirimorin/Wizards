@@ -49,6 +49,9 @@ public abstract class CharControlBase : MonoBehaviour {
 
 	// Use this for initialization
 	protected void Start () {
+		Debug.Log ("CharControlBase constructor start");
+		Debug.Log ("CharControlBase found parent: " + gameObject.name);
+
 		if (acceleration == 0f)
 			Debug.LogWarning ("Warning: acceleration not set!");
 		if (brakeSpeed == 0f)
@@ -76,6 +79,8 @@ public abstract class CharControlBase : MonoBehaviour {
 		groundLayers |= (1 << LayerMask.NameToLayer("Floor"));
 
 		anim = gameObject.GetComponent<Animator> ();
+
+		Debug.Log ("CharControlBase constructor end");
 	}
 
 	protected void Update () {
