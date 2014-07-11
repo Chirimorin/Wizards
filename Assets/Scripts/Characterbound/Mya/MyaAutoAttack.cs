@@ -5,10 +5,17 @@ public class MyaAutoAttack : MeleeBase {
 
 	// Use this for initialization
 	new void Start () {
-		width = 2;
-		height = 2;
+		width = 0.5f;
+		height = 1f;
 		offsetX = 0.5f;
-		offsetY = -0.2f;
+		offsetY = 0f;
+
+		damage = 1;
+		knockback = 0;
+		attackTime = 0.2f;
+		attackCooldown = 0.5f;
+
+		attackButton = "Fire1";
 
 		base.Start ();
 	}
