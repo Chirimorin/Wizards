@@ -7,7 +7,7 @@ public class MeleeBase : MonoBehaviour {
 	public float offsetX = 0; // Higher is more to the front of the character
 	public float offsetY = 0; 
 
-	public float damage = 0;
+	public int damage = 0;
 	public float knockback = -1;
 	public float attackTime = 0;
 	public float attackCooldown = 0;
@@ -86,6 +86,8 @@ public class MeleeBase : MonoBehaviour {
 		if (c.gameObject.tag == "Enemy") {
 			// TODO: deal damage and knockback to enemy.
 			Debug.Log("Enemy hit!");
+
+			((Health)(c.gameObject.GetComponent("Health"))).Damage(damage);
 		}
 	}
 }

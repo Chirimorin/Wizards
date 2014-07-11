@@ -10,10 +10,10 @@ public class MyaAutoAttack : MeleeBase {
 		offsetX = 0.5f;
 		offsetY = 0f;
 
-		damage = 1;
+		damage = 49;
 		knockback = 0;
-		attackTime = 0.2f;
-		attackCooldown = 0.5f;
+		attackTime = 0.1f;
+		attackCooldown = 0.2f;
 
 		attackButton = "Fire1";
 
