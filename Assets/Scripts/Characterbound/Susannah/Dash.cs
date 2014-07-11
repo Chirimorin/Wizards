@@ -17,8 +17,14 @@ public class Dash : MonoBehaviour {
 	public bool WalCol{
 		get{
 			Debug.DrawRay(transform.position + new Vector3 (0, rayPosY, 0), -Vector2.right, Color.black);
+			Debug.DrawRay(transform.position - new Vector3 (0, rayPosY, 0), -Vector2.right, Color.black);
+			Debug.DrawRay(transform.position + new Vector3 (0, rayPosY, 0), Vector2.right, Color.black);
+			Debug.DrawRay(transform.position - new Vector3 (0, rayPosY, 0), Vector2.right, Color.black);
 
-			return (bool)(Physics2D.Raycast (transform.position + new Vector3 (0, rayPosY, 0), -Vector2.right, 1f, dashMask) || Physics2D.Raycast(transform.position, Vector2.right, 1f, dashMask));
+			return (bool)(Physics2D.Raycast (transform.position + new Vector3 (0, rayPosY, 0), -Vector2.right,0.75f, dashMask) || 
+			              Physics2D.Raycast (transform.position - new Vector3 (0, rayPosY, 0), -Vector2.right, 0.75f, dashMask) || 
+			              Physics2D.Raycast(transform.position + new Vector3 (0, rayPosY, 0), Vector2.right, 0.75f, dashMask) ||
+						  Physics2D.Raycast(transform.position - new Vector3 (0, rayPosY, 0), Vector2.right, 0.75f, dashMask));
 		}
 	}
 
@@ -31,21 +37,25 @@ public class Dash : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//TODO collision handling
+
 		dashMask = (LayerMask)0;
 		dashMask |= 1 << LayerMask.NameToLayer ("Wall");
+		dashMask |= 1 << LayerMask.NameToLayer ("Floor");
 
 		if(WalCol){
 			StopCoroutine ("HorizontalDash");
 			//collider2D.sharedMaterial = material;
 			CC.enabled = true;
+			//collider2D.isTrigger = false;
 		}
 
-		if(Input.GetButtonDown("Fire1") && transform.localScale.x > 0){
+		if(Input.GetButtonDown("Fire2") && transform.localScale.x > 0){
 			currentPosition = transform.position;
 			StartCoroutine ("HorizontalDash", 1f);
 			CC.enabled = false;
 			dashNow = true;
-		}else if(Input.GetButtonDown("Fire1") && transform.localScale.x < 0){
+		}else if(Input.GetButtonDown("Fire2") && transform.localScale.x < 0){
 			currentPosition = transform.position;
 			StartCoroutine ("HorizontalDash", -1f);
 			CC.enabled = false;
@@ -68,8 +78,11 @@ public class Dash : MonoBehaviour {
 			//transform.position += new Vector3 (direction * speed * Time.deltaTime, 0, 0);
 			//rigidbody2D.velocity = new Vector2(direction * speed, 0);
 			rigidbody2D.AddForce(new Vector2(direction * speed, 0));
+
+			//collider2D.isTrigger = true;
 			yield return null;
 		}
+		//collider2D.isTrigger = false;
 		rigidbody2D.velocity = new Vector2 (0,0);
 		yield break;
 	}
