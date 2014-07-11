@@ -31,13 +31,14 @@ public class ShootingBase : MonoBehaviour {
 	protected void Update () {
 
 		//TODO Homing improvement;
-
 		foreach(GameObject enemy in enemies){
-			if(Vector3.Distance (transform.position, enemy.transform.position) < 4f && VerticalHoming != null && ProjectileInstance){
-				ProjectileInstance.rigidbody2D.AddRelativeForce (new Vector2(0, VerticalHoming));
+			if(enemy){
+				if(Vector3.Distance (transform.position, enemy.transform.position) < 4f && VerticalHoming != null && ProjectileInstance){
+					ProjectileInstance.rigidbody2D.AddRelativeForce (new Vector2(0, VerticalHoming));
+				}
 			}
 		}
-	
+
 
 
 		if(ProjectileInstance){

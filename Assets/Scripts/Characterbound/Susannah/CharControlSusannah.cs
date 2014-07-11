@@ -8,7 +8,7 @@ public class CharControlSusannah : CharControlBase {
 		acceleration = 0.67f;
 		maxSpeed = 5f;
 		brakeSpeed = 1f;
-		jumpheight = 800;
+		jumpheight = 1100;
 		baseGravity = 2.1f;
 		floatyness = 0;
 		base.Start ();

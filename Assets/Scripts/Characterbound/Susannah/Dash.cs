@@ -6,6 +6,8 @@ public class Dash : MonoBehaviour {
 	public float speed = 5f;
 	public float range = 3f;
 	public float rayPosY = 0.5f;
+	public bool affectGravity;
+	private float firstGravity;
 
 	private CharControlSusannah CC;
 	private bool dashNow;
@@ -32,11 +34,12 @@ public class Dash : MonoBehaviour {
 	void Start () {
 		CC = GetComponent<CharControlSusannah>();
 		dashNow = false;
+		firstGravity = rigidbody2D.gravityScale;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		//TODO collision handling
 
 		dashMask = (LayerMask)0;
@@ -75,15 +78,17 @@ public class Dash : MonoBehaviour {
 
 	IEnumerator HorizontalDash(float direction){
 		while (Mathf.Abs(transform.position.x - currentPosition.x) < range) {
-			//transform.position += new Vector3 (direction * speed * Time.deltaTime, 0, 0);
-			//rigidbody2D.velocity = new Vector2(direction * speed, 0);
+			if(!affectGravity){
+				rigidbody2D.gravityScale = 0;
+			}
 			rigidbody2D.AddForce(new Vector2(direction * speed, 0));
 
-			//collider2D.isTrigger = true;
+			collider2D.isTrigger = true;
 			yield return null;
 		}
-		//collider2D.isTrigger = false;
+		collider2D.isTrigger = false;
 		rigidbody2D.velocity = new Vector2 (0,0);
+		rigidbody2D.gravityScale = firstGravity;
 		yield break;
 	}
 
