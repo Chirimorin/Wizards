@@ -5,6 +5,7 @@ public class Dash : MonoBehaviour {
 
 	public float speed = 5f;
 	public float range = 3f;
+	public int damage = 10;
 	public float rayPosY = 0.5f;
 	public bool affectGravity;
 	private float firstGravity;
@@ -49,6 +50,7 @@ public class Dash : MonoBehaviour {
 		if(WalCol){
 			StopCoroutine ("HorizontalDash");
 			//collider2D.sharedMaterial = material;
+			collider2D.isTrigger = false;
 			CC.enabled = true;
 			//collider2D.isTrigger = false;
 		}
@@ -82,7 +84,7 @@ public class Dash : MonoBehaviour {
 				rigidbody2D.gravityScale = 0;
 			}
 			rigidbody2D.AddForce(new Vector2(direction * speed, 0));
-
+			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
 			collider2D.isTrigger = true;
 			yield return null;
 		}
@@ -99,4 +101,21 @@ public class Dash : MonoBehaviour {
 			Debug.Log ("Stopped");
 		}
 	}
+
+	void OnTriggerEnter2D(Collider2D c){
+		if(c.tag == "Wall"){
+			rigidbody2D.velocity = new Vector2(0,0);
+			collider2D.isTrigger = false;
+			CC.enabled = true;
+			StopCoroutine("HorizontalDash");
+			Debug.Log ("Detected");
+		}
+
+		if(c.tag == "Enemy"){
+			(c.gameObject.GetComponent<Health>() as Health).Damage (damage);
+			Debug.Log ("Dash collides with enemy");
+		}
+
+	}
+
 }

@@ -101,12 +101,14 @@ public class ShootingBase : MonoBehaviour {
 
 	protected void JumpShoot(){
 		ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, -1f, 0f), Quaternion.Euler (0,0,0)) as GameObject;
-		ProjectileInstance.rigidbody2D.AddForce(new Vector2(0, -50000) * Time.deltaTime);
+		ProjectileInstance.rigidbody2D.AddForce(new Vector2(0, -1000 * power) * Time.deltaTime);
+		ProjectileInstance.transform.rotation = Quaternion.Euler (new Vector3(0,0,90));
 	}
 	
 	protected void ShootUp(){
 		ProjectileInstance = Instantiate (projectile, transform.position + new Vector3 (0, 1f, 0f), Quaternion.Euler (0,0,0)) as GameObject;
-		ProjectileInstance.rigidbody2D.AddForce(new Vector2(0, 50000) * Time.deltaTime);
+		ProjectileInstance.rigidbody2D.AddForce(new Vector2(0, 1000 * power) * Time.deltaTime);
+		ProjectileInstance.transform.rotation = Quaternion.Euler (new Vector3(0,0,90));
 	}
 
 }
