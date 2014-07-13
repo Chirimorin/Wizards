@@ -17,6 +17,9 @@ public class Dash : MonoBehaviour {
 	private Vector3 rayPostLeft, rayPosRight;
 	private LayerMask dashMask;
 
+	private float timeStamp;
+	public float cooldown;
+
 	public bool WalCol{
 		get{
 			Debug.DrawRay(transform.position + new Vector3 (0, rayPosY, 0), -Vector2.right, Color.black);
@@ -55,12 +58,14 @@ public class Dash : MonoBehaviour {
 			//collider2D.isTrigger = false;
 		}
 
-		if(Input.GetButtonDown("Fire2") && transform.localScale.x > 0){
+		if(Input.GetButtonDown("Fire2") && transform.localScale.x > 0 && Time.time > timeStamp){
+			timeStamp = Time.time + cooldown;
 			currentPosition = transform.position;
 			StartCoroutine ("HorizontalDash", 1f);
 			CC.enabled = false;
 			dashNow = true;
-		}else if(Input.GetButtonDown("Fire2") && transform.localScale.x < 0){
+		}else if(Input.GetButtonDown("Fire2") && transform.localScale.x < 0 && Time.time > timeStamp){
+			timeStamp = Time.time + cooldown;
 			currentPosition = transform.position;
 			StartCoroutine ("HorizontalDash", -1f);
 			CC.enabled = false;
@@ -83,11 +88,15 @@ public class Dash : MonoBehaviour {
 			if(!affectGravity){
 				rigidbody2D.gravityScale = 0;
 			}
+			//(GetComponent<BoxCollider2D>() as BoxCollider2D).size = new Vector2(2,1);
+			Physics2D.IgnoreLayerCollision (8, 11, false);
 			rigidbody2D.AddForce(new Vector2(direction * speed, 0));
 			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
 			collider2D.isTrigger = true;
 			yield return null;
 		}
+		(GetComponent<BoxCollider2D>() as BoxCollider2D).size = new Vector2(1,1);
+		Physics2D.IgnoreLayerCollision (8, 11);
 		collider2D.isTrigger = false;
 		rigidbody2D.velocity = new Vector2 (0,0);
 		rigidbody2D.gravityScale = firstGravity;

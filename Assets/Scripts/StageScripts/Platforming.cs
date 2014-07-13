@@ -23,7 +23,7 @@ public class Platforming : MonoBehaviour {
 	void Update () {
 		//Update the parent
 
-			parent = GameObject.Find("NecroFT(Clone)");
+		parent = GameObject.FindGameObjectWithTag ("Player");
 
 
 		try{
@@ -66,7 +66,7 @@ public class Platforming : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D(Collider2D col){
-		if (col.name == "NecroFT(Clone)") {
+		if (col.tag == "Player") {
 			triggered = true;
 
 		}
@@ -75,7 +75,7 @@ public class Platforming : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D col){
-		if (col.name == "NecroFT(Clone)") {
+		if (col.tag == "Player") {
 			Debug.Log ("exit");
 			//triggered = false;
 		}

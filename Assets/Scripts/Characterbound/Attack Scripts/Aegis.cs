@@ -17,7 +17,7 @@ public class Aegis : MonoBehaviour {
 	void Update () {
 		parent = GameObject.FindGameObjectWithTag ("Player");
 		try{
-			transform.position = parent.transform.position;
+			transform.position = parent.transform.position + new Vector3(0,0, 2);
 		}catch(UnityException e){
 			Debug.Log (e);
 		}

@@ -91,13 +91,11 @@ GameObject:
   - 23: {fileID: 2300000}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
-  - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
-  - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400012}
+  - 114: {fileID: 11400014}
   m_Layer: 8
   m_Name: Susannah
   m_TagString: Player
@@ -281,41 +279,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_Enabled: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1463f56a597635546af910bba6c37b4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayStart: {fileID: 400004}
-  rayEnd: {fileID: 400006}
-  rayEnd2: {fileID: 400002}
-  rayStart2: {fileID: 400000}
-  isGrounded: 0
-  isGrounded2: 0
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97bf7fcfba145b24e93f4c262fa317d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedx: 0
-  speedy: 0
-  acceleration: 0
-  brakeSpeed: 1
-  targetSpeed: 5
-  jumpheight: 1100
-  cam: {fileID: 2000000}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -334,18 +297,6 @@ MonoBehaviour:
   baseGravity: 0
   floatyness: 0
   numJumps: 1
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4c06dcdea5f8b4e9dea320c78b2ce6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 100000, guid: 865d300bc742f1649b12b0a7807408c2, type: 2}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,8 +310,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 800
   range: 5
+  damage: 10
   rayPosY: .5
   affectGravity: 0
+  cooldown: 1
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -397,6 +350,20 @@ MonoBehaviour:
   autofire: 0
   cooldown: 1
   button: Fire3
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459cb2ae79810e042adab78742588f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Button: Fire4
+  aegis: {fileID: 100000, guid: 5e707eecb90f5d8498a69e7acba3b6b5, type: 2}
+  cooldown: 5
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

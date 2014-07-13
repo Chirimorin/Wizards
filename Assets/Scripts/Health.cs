@@ -30,4 +30,12 @@ public class Health : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
+
+	public void Stun(float duration){
+		//TODO stuns
+	}
+
+	public void Knockback(int power, Vector3 direction){
+		rigidbody2D.AddRelativeForce (direction * power);
+	}
 }
