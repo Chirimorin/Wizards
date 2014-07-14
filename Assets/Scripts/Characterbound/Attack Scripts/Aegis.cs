@@ -46,7 +46,7 @@ public class Aegis : MonoBehaviour {
 		if(c.tag == "Enemy"){
 			(c.gameObject.GetComponent<Health>() as Health).Damage (damage);
 			Debug.Log ("Hit");
-			(c.gameObject.GetComponent<Health>() as Health).Knockback (100, ((transform.position - c.gameObject.transform.position)*-1).normalized);
+			(c.gameObject.GetComponent<Health>() as Health).Knockback (800, ((transform.position - c.gameObject.transform.position)*-1).normalized);
 		}
 
 

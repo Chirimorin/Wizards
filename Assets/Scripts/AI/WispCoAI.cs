@@ -43,7 +43,7 @@ public class WispCoAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		player = GameObject.Find ("NecroFT(Clone)");
+		player = GameObject.FindGameObjectWithTag ("Player");
 
 		try{
 			deltaDistanceX = Mathf.Abs(transform.position.x - player.transform.position.x);
