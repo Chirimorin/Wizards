@@ -35,7 +35,7 @@ public class Health : MonoBehaviour {
 		//TODO stuns
 	}
 
-	public void Knockback(int power, Vector3 direction){
-		rigidbody2D.AddRelativeForce (direction * power);
+	public void Knockback(int power, Vector3 normalizedDirection){
+		rigidbody2D.AddForce (normalizedDirection * power);
 	}
 }

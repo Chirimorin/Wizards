@@ -25,6 +25,7 @@ public class LanceProperties : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D c){
 		if(c.tag == "Enemy"){
 			(c.gameObject.GetComponent<Health>() as Health).Damage (damage);
+			(c.gameObject.GetComponent<Health>() as Health).Knockback (100, ((transform.position - c.gameObject.transform.position)*-1).normalized);
 			Debug.Log ("The magical lance penetrates the enemy, slowly but painfully, causing " + damage + " damage");
 		}
 	}
