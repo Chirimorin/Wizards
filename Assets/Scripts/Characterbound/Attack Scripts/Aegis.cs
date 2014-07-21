@@ -4,16 +4,17 @@ using System.Collections;
 public class Aegis : MonoBehaviour {
 
 	private GameObject parent;
-	public float duration = 5;
+	public float duration = 1;
 	public int damage = 10;
 	public float deltaTick = 1f;
 	private float timer;
 
+	private CircleCollider2D col;
 	private Vector3 knockbackDirection;
 
 	// Use this for initialization
 	void Start () {
-		collider2D.enabled = false;
+		col = this.GetComponent<CircleCollider2D>();
 	}
 	
 	// Update is called once per frame
@@ -25,19 +26,13 @@ public class Aegis : MonoBehaviour {
 			Debug.Log (e);
 		}
 
+		transform.localScale += new Vector3 (50f * Time.deltaTime, 50f * Time.deltaTime, 0);
 
 		DestroyObject (this.gameObject, duration);
 		//Debug.Log (timer);
 		timer += Time.deltaTime;
 
-		if(timer > deltaTick + 0.5f){
-			timer = 0;
-			collider2D.enabled = false;
-		}
 
-		if(timer > deltaTick){
-			collider2D.enabled = true;
-		}
 
 	}
 

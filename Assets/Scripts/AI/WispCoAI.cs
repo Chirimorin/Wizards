@@ -85,7 +85,7 @@ public class WispCoAI : MonoBehaviour {
 			Debug.Log (diveStateTimer);
 		}
 		
-		Debug.Log (health);
+		//Debug.Log (health);
 		//Destroy instance on health = 0
 		if(health <= 0){
 			DestroyObject (this.gameObject);
