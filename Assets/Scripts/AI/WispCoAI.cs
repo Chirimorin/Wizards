@@ -39,6 +39,7 @@ public class WispCoAI : MonoBehaviour {
 		diveAble = true;
 		chaseAble = true;
 		idleState = true;
+		//base.Start ();
 	}
 	
 	// Update is called once per frame
@@ -122,6 +123,8 @@ public class WispCoAI : MonoBehaviour {
 				transform.position = Vector3.MoveTowards (currentPosition, startPosition, 0.1f * Time.deltaTime);
 				
 			}
+
+		//base.Update ();
 	}
 
 	IEnumerator ChaseState(){
